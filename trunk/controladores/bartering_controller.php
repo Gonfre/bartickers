@@ -15,12 +15,22 @@ class BarteringController extends Controller {
 	}
 	
 	public function results() {
-		$this->layout = "noMenu";
+		$this->layout = "buttonRight";
 		$this->titleShowed = "Resultados";
 		$this->pageTitle = "Resultados";
+		$this->buttonRightText = "";
+		$this->buttonRightAction = "";
+		$this->buttonRightIcon = "search";
 		
 		$this->distance = $_REQUEST['distance'];
 		$this->tipo = $_REQUEST['tipoBusqueda'];
+	}
+	
+	public function popup() {
+		$this->layout = "noMenu";
+		$this->titleShowed = "Resultados";
+		
+		$this->idTrueque = $_REQUEST['idTrueque'];
 	}
 }
 
