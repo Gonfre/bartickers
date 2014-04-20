@@ -120,3 +120,11 @@ function openMenuOnSwipe() {
         }
     });
 } 
+
+function holdTapBox() {
+	$(".box").bind( "taphold", tapholdHandler );
+	
+	function tapholdHandler( event ){
+		$( event.target ).parent().parent().addClass( "taphold" );
+	}	
+}
