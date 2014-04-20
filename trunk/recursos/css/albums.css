@@ -21,6 +21,10 @@ PAGE: ALBUMS
   background-color: #A9DFFF;
 }
 
+#albums li.box.tap {
+  background-color: #A9DFFF;
+}
+
 #albums li a img {
   max-width: 100%;
 }

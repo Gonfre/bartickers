@@ -125,6 +125,19 @@ function holdTapBox() {
 	$(".box").bind( "taphold", tapholdHandler );
 	
 	function tapholdHandler( event ){
-		$( event.target ).parent().parent().addClass( "taphold" );
+		//$( event.target ).parent().parent().addClass( "taphold" );
+		$( event.target ).parent().attr("href","#confirmDialog");
+		$( event.target ).parent().attr("data-rel","popup");
+		$( event.target ).parent().attr("data-position-to","window");
+		$( event.target ).parent().attr("data-transition","slidefade");
+		showConfirmDialog('001');
+	}	
+}
+
+function tapBox() {
+	$( ".box" ).bind( "tap", tapHandler );
+	 
+	function tapHandler( event ){
+		$( event.target ).parent().parent().addClass( "tap" );
 	}	
 }

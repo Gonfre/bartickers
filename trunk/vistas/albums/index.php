@@ -57,4 +57,5 @@
 </ul>
 <script type="text/javascript">
 	holdTapBox();
+	tapBox();
 </script>
