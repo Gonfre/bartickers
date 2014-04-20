@@ -17,6 +17,10 @@ PAGE: ALBUMS
   background-color: #A9DEC5;
 }
 
+#albums li.box.taphold {
+  background-color: #A9DFFF;
+}
+
 #albums li a img {
   max-width: 100%;
 }
