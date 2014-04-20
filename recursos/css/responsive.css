@@ -1,0 +1,7 @@
+@media screen and (min-width: 480px) {
+	
+	#albums li {
+  		width: 7.5%;
+	}
+  
+}
