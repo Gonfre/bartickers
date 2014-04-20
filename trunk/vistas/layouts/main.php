@@ -15,7 +15,9 @@
 		<link rel="stylesheet" type='text/css' href="recursos/css/jquery.mobile.structure-1.4.2.min.css"/>
 		<link rel="stylesheet" type='text/css' href="recursos/themes/jquery.mobile.icons.min.css"/>
 		<link rel="stylesheet" type='text/css' href="recursos/themes/barticker-green.css"/>
-
+		<link rel="stylesheet" type='text/css' href="recursos/css/albums.css"/>
+		<link rel="stylesheet" type='text/css' href="recursos/css/responsive.css"/>
+		
 		<script type="text/javascript">
 			$(document).ready(openMenuOnSwipe);
 		</script>
