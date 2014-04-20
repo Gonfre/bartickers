@@ -1,0 +1,1 @@
+<h2>Popup: <?php echo $this->idTrueque; ?></h2>

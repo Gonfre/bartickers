@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
     	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<meta name = "viewport" content = "user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
+		<meta name = "viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="mobile-web-app-capable" content="yes">
     
@@ -15,6 +15,8 @@
 		<link rel="stylesheet" type='text/css' href="recursos/css/jquery.mobile.structure-1.4.2.min.css"/>
 		<link rel="stylesheet" type='text/css' href="recursos/themes/jquery.mobile.icons.min.css"/>
 		<link rel="stylesheet" type='text/css' href="recursos/themes/barticker-green.css"/>
+		<link rel="stylesheet" type='text/css' href="recursos/css/albums.css"/>
+		<link rel="stylesheet" type='text/css' href="recursos/css/responsive.css"/>
 		
 		<script type="text/javascript">
 			$(document).ready(openMenuOnSwipe);
@@ -33,14 +35,14 @@
 					    <h5>Mi mundialito (55/640)</h5>
 					    <fieldset data-role="controlgroup" data-mini="true">
 			    			<a href="#" rel="external" class="ui-btn ui-mini ui-corner-all ui-btn-a ui-icon-eye ui-btn-icon-left">Ver &aacute;lbum</a>
-					    	<a href="#" rel="external" class="ui-btn ui-corner-all ui-btn-a ui-icon-recycle ui-btn-icon-left">Truequear</a>
+					    	<a href="bartering" rel="external" class="ui-btn ui-corner-all ui-btn-a ui-icon-recycle ui-btn-icon-left">Truequear</a>
 			    		</fieldset>
 					</div>
 				    <div data-role="collapsible" data-theme="c">
 					    <h5>El de mi hermana (20/640)</h5>
 					    <fieldset data-role="controlgroup" data-mini="true">
 			    			<a href="#" rel="external" class="ui-btn ui-mini ui-corner-all ui-btn-a ui-icon-eye ui-btn-icon-left">Ver &aacute;lbum</a>
-					    	<a href="#" rel="external" class="ui-btn ui-corner-all ui-btn-a ui-icon-recycle ui-btn-icon-left">Truequear</a>
+					    	<a href="bartering" rel="external" class="ui-btn ui-corner-all ui-btn-a ui-icon-recycle ui-btn-icon-left">Truequear</a>
 			    		</fieldset>
 					</div>
 			    </div>
@@ -65,8 +67,7 @@
 				<h1><?php echo $this->titleShowed; ?></h1>
 				
 				<a href="#panel-menu" data-theme="b" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Open left panel</a>
-				<a href="<?php echo $this->buttonRightAction; ?>" class="ui-btn ui-icon-action ui-btn-icon-right ui-shadow-icon"><?php echo $this->buttonRightText; ?></a>
-
+				<a href="<?php echo $this->buttonRightAction; ?>" data-theme="b" data-icon="<?php echo $this->buttonRightIcon; ?>" <?php echo ($this->buttonRightText == "" ? 'data-iconpos="notext"' : "");?> data-shadow="false" data-iconshadow="false"><?php echo $this->buttonRightText; ?></a>
 			</div>
 			
 			<!-- content -->
