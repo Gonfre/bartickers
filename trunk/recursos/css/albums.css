@@ -1,0 +1,43 @@
+/**********************************
+PAGE: ALBUMS
+***********************************/
+
+#albums {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#albums li a{
+	text-decoration: none;
+	text-align: center;
+}
+
+#albums li:hover {
+  background-color: #A9DEC5;
+}
+
+#albums li a img {
+  max-width: 100%;
+}
+
+/*****************************
+	TotalColm * TotalMargen = total de Margen
+	5 * 5 = 25
+	100% - 25% = 75%
+	75% / 5 = 15
+******************************/
+#albums li {
+  float: left;
+  width: 15%;
+  margin: 2.5%;
+  background-color: #f6f6f6;
+}
+
+#albums li a p {
+  margin: 0;
+  padding: 5%;
+  font-size: 0.79em;
+  color: #99A19D;
+}
+
