@@ -31,19 +31,19 @@ function buscar(a, id) {
     <li>
     	<a onclick="javascript:buscar(this, 1)" href="#" data-rel="dialog">
     		<label>Luis G.</label>
-    		<span class="ui-li-count">D: 6 / R: 6</span>
+    		<span class="ui-li-count">E: 6 / R: 6</span>
     	</a>
     </li>
     <li>
     	<a href="#">
     		<label>Jhongo</label>
-    		<span class="ui-li-count">D: 5 / R: 4</span>
+    		<span class="ui-li-count">E: 5 / R: 4</span>
     	</a>
     </li>
     <li>
     	<a href="#">
     		<label>Casper, Dayana</label>
-    		<span class="ui-li-count">D: 3 / R: 3</span>
+    		<span class="ui-li-count">E: 3 / R: 3</span>
     	</a>
     </li>
     
@@ -54,7 +54,7 @@ function buscar(a, id) {
     <li>
     	<a href="#">
     		<label>Perroti</label>
-    		<span class="ui-li-count">D: 2 / R: 2</span>
+    		<span class="ui-li-count">E: 2 / R: 2</span>
     	</a>
     </li>
 </ul>
