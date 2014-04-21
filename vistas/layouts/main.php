@@ -67,6 +67,7 @@
 				<h1><?php echo $this->titleShowed; ?></h1>
 				
 				<a href="#panel-menu" data-theme="b" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Open left panel</a>
+				<?php echo (isset($this->right) ? $this->right : "");?>
 			</div>
 			
 			<!-- content -->
