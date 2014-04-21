@@ -22,6 +22,7 @@
 			<!-- header -->
 			<div data-role="header" data-position="fixed">
 				<h1><?php echo $this->titleShowed; ?></h1>
+				<?php echo (isset($this->right) ? $this->right : "");?>
 			</div>
 			
 			<!-- content -->
