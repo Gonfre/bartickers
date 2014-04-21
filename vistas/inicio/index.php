@@ -35,7 +35,13 @@
 <ul data-role="listview" data-split-icon="delete" data-theme="a" data-divider-theme="a" data-count-theme="c" data-inset="true">
 	<li data-role="list-divider">
 		<div class="ui-bar ui-bar-a" style="border:0px;">
-		    <label><strong>Registrate:</strong></label>
+			<table border="0" style="width:100%;margin:left;">
+				<tr>
+					<td><label><strong>Registrate en Barticker</strong></label></td>
+					<td style="text-align:left;"><img src="recursos/imgs/24x24.png" alt="facebook"></td>
+				</tr>
+			</table>
+		    
 		</div>
 	</li>
 	<li>
@@ -55,7 +61,7 @@
 				  <td><input type="password" data-clear-btn="false" name="contra" id="contra" value="" autocomplete="off"></td>
 				</tr>
 				<tr>
-				  <td colspan="2"><input type="button" value="Registrarme"></td>
+				  <td colspan="2"><input type="button" value="Enviar"></td>
 				</tr>
 				</table>
 				<p>
