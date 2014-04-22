@@ -6,6 +6,9 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="mobile-web-app-capable" content="yes">
     
+    	<link rel="apple-touch-icon" href="recursos/imgs/250x250.png" />
+		<link rel="apple-touch-icon-precomposed" href="recursos/imgs/250x250.png" />
+    	
     	<?php echo APP_BASE; ?>
 		<title><?php echo APP_TITLE; ?> - <?php echo $this->pageTitle; ?></title>
 		<script type="text/javascript" src="recursos/js/jquery-1.11.0.min.js"></script>
