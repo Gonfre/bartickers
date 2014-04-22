@@ -6,7 +6,15 @@ $( document ).on( "pagecreate", "#page", function() {
 //-->
 </script>
 
+<style>
+<!--
+div.bgboy {
+	background: url("recursos/imgs/boy.png") no-repeat right top;
+}
+-->
+</style>
 
+<div class="bgboy">
 <h2><?php echo $this->name; ?></h2> <label>(<?php echo $this->email; ?>)</label>
 
 
@@ -91,3 +99,5 @@ while ($this->albums->next()) {
 <!-- Notificaciones -->
 <input name="checkNotif" id="checkNotif" data-mini="false" type="checkbox" data-theme="a"<?php if ($this->notif == "Y") { echo ' checked="checked"'; }?>>
 <label for="checkNotif">Deseo recibir notificaciones en mi email.</label>
+
+</div>
