@@ -34,7 +34,7 @@ define ("APP_BASE", "<base href='". APP_URL ."' />");
 #----------------------------------------------------------------------
 
 define ("APP_TITLE", "Barticker");
-#define ("APP_DEFAULT", "controlador/metodo");
+define ("APP_DEFAULT", "inicio");
 
 	
 #----------------------------------------------------------------------
