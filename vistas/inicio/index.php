@@ -7,7 +7,9 @@
 	<li>
 		<div class="ui-grid-a" style="text-align:center;">
 			 <div class="ui-block-a" style="width:100%;text-align:center;">
-				<img src="recursos/imgs/face_sesion.png" alt="facebook">
+				<!--  <img src="recursos/imgs/face_sesion.png" alt="facebook"> -->
+				<img src="recursos/imgs/face_sesion.png" style="cursor:pointer;" onclick="Login()"/>
+				
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<img src="recursos/imgs/google_sesion.png" alt="Google +">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
