@@ -10,11 +10,23 @@
 				<!--  <img src="recursos/imgs/face_sesion.png" alt="facebook"> -->
 				<img src="recursos/imgs/face_sesion.png" style="cursor:pointer;" onclick="Login()"/>
 				
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<img src="recursos/imgs/google_sesion.png" alt="Google +">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<!-- <img src="recursos/imgs/google_sesion.png" alt="Google +"> -->
+				<span id="signinButton">
+				  <span
+					class="g-signin"
+					data-callback="signinCallback"
+					data-clientid="640066723166-s3l58f6aju3ifce8f94loivd40b8960o.apps.googleusercontent.com"
+					data-cookiepolicy="single_host_origin"
+					data-requestvisibleactions="http://schemas.google.com/AddActivity"
+					data-scope="https://www.googleapis.com/auth/plus.login"
+					data-width="iconOnly"
+					data-height="tall">
+				  </span>
+				</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
-				<a href="#popupLogin" data-rel="popup" data-position-to="window" data-transition="pop" data-shadow="false" data-theme="none"><img src="recursos/imgs/50x50.png" border="0"/></a>
+				<a href="#popupLogin" data-rel="popup" data-position-to="window" data-transition="pop" data-shadow="false" data-theme="none"><img src="recursos/imgs/45x45.png" border="0"/></a>
 				<br/>
 				<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
 					<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
