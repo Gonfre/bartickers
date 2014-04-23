@@ -124,7 +124,7 @@
 			if (authResult['access_token']) {
 				// Autorizado correctamente
 				// Oculta el botón de inicio de sesión ahora que el usuario está autorizado, por ejemplo:
-				document.getElementById('signinButton').setAttribute('style', 'display: none');
+				//document.getElementById('signinButton').setAttribute('style', 'display: none');
 				alert('Autenticado');
 			} else if (authResult['error']) {
 				// Se ha producido un error.
