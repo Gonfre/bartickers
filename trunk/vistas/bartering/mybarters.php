@@ -15,17 +15,17 @@ function buscar(a) {
   <div data-role="navbar">
     <ul>
       <li>
-      	<a class="ui-btn-active" href="mybarters#one" data-theme="a" data-ajax="false">
+      	<a class="ui-btn-active" href="bartering/mybarters#one" data-theme="a" data-ajax="false">
       		Pendientes
       	</a>
       </li>
       <li>
-      	<a href="mybarters#two" data-theme="a" data-ajax="false">
+      	<a href="bartering/mybarters#two" data-theme="a" data-ajax="false">
       		Confirmados
       	</a>
       </li>
       <li>
-      	<a href="mybarters#three" data-theme="a" data-ajax="false">
+      	<a href="bartering/mybarters#three" data-theme="a" data-ajax="false">
       		Completados
       	</a>
       </li>

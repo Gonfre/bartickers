@@ -51,7 +51,7 @@
 			    </div>
 			    <hr />
 			    <fieldset data-role="controlgroup" data-mini="true">
-			    	<a href="mybarters" rel="external" class="ui-btn ui-corner-all ui-btn-a ui-icon-recycle ui-btn-icon-left">Mis Trueques</a>
+			    	<a href="bartering/mybarters" rel="external" class="ui-btn ui-corner-all ui-btn-a ui-icon-recycle ui-btn-icon-left">Mis Trueques</a>
 			    </fieldset>
 			    <hr />
 			    <fieldset data-role="controlgroup" data-mini="true">

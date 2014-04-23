@@ -25,7 +25,7 @@ class BarteringController extends Controller {
 
 	}
 	
-	public function popup() {
+	public function zoom() {
 		$this->layout = "noMenu";
 		
 		$this->idTrueque = $_REQUEST['idTrueque'];
@@ -33,6 +33,11 @@ class BarteringController extends Controller {
 		$this->titleShowed = "Casper, Dayana";
 		//$this->right = '<span class="ui-li-count" id="counter">E: 3 / R: 3</span>';
 		$this->right = '<center><label>Entregar: <span id="entregar">3</span> / Recibir: <span id="recibir">3</span></label></center>';
+	}
+	
+	
+	public function mybarters() {
+		$this->titleShowed = "Mis Trueques";
 	}
 }
 
