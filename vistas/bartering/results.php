@@ -1,7 +1,7 @@
 <script type="text/javascript">
 <!--
 function buscar(a, id) {
-	a.href = "bartering/popup?idTrueque="+id;
+	a.href = "bartering/zoom?idTrueque="+id;
 }
 //-->
 </script>
