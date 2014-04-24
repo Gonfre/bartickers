@@ -79,6 +79,6 @@ define ("APP_STATUS_MESSAGE","ACTIVO");
 #----------------------------------------------------------------------
 
 define ("DEFAULT_LANG", "es");
-define ("I18N_METHOD","DB");
+define ("I18N_METHOD","XML");
 
 ?>

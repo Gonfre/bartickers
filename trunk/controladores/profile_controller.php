@@ -2,6 +2,7 @@
 
 require_once("libs/controller.php");
 require_once("libs/localuser.php");
+require_once("libs/i18n.php");
 require_once("modelos/users.php");
 require_once("modelos/albums.php");
 require_once("modelos/album_stickers.php");
@@ -10,7 +11,7 @@ class ProfileController extends Controller {
 	
 	public function __construct() {
 		$this->layout = "main";
-		$this->titleShowed = "Mi Perfil";	
+		$this->titleShowed = "Mi Perfil";
 		$this->pageTitle = "Mi Perfil";
 	}
 	
