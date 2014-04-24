@@ -5,8 +5,8 @@
 function loadGeoData(idText) {
 	$( "#"+idText ).on( "filterablebeforefilter", function ( e, data ) {
         var $ul = $( this );
-        input = $( data.input );
-        value = input.val();
+        inputLocation = $( data.input );
+        value = inputLocation.val();
         html = "";
         $ul.html( "" );
         if ( value && value.length > 2 ) {
@@ -17,7 +17,7 @@ function loadGeoData(idText) {
                 dataType: "jsonp",
                 crossDomain: true,
                 data: {
-                    q: input.val()
+                    q: inputLocation.val()
                 }
             })
             .then( function ( response ) {
@@ -28,7 +28,7 @@ function loadGeoData(idText) {
                 	a.setAttribute("class", "ui-btn");
                 	a.setAttribute("rel", "dialog");
                 	a.onclick = function() {
-                		input.val( val );
+                		inputLocation.val( val );
                         $ul.html( "" );
                         $ul.listview( "refresh" );
                         $ul.trigger( "updatelayout");
@@ -49,7 +49,7 @@ function putValue(id, val) {
 }
 
 function showConfirmDialog(title, msg, msg2, action) {
-		
+	
 	var divPopup = document.createElement("DIV");
 	divPopup.setAttribute("data-role", "popup");
 	divPopup.setAttribute("id", "confirmDialog");
@@ -81,7 +81,7 @@ function showConfirmDialog(title, msg, msg2, action) {
 	p.innerHTML = msg2;
 	
 	var a1 = document.createElement("A");
-	a1.setAttribute("href", "javascript:closeDialog();");
+	a1.setAttribute("href", "javascript:closeDialog('confirmDialog');");
 	a1.setAttribute("class", "ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b");
 	a1.innerHTML = "Cancelar";
 	
@@ -102,12 +102,79 @@ function showConfirmDialog(title, msg, msg2, action) {
 	
 	// preparo el div
 	$( "#confirmDialog" ).popup();
-	//$( "#confirmDialog" ).popup( "open" );
+	$( "#confirmDialog" ).popup( "open", {transition: "flip"} );
 }
 
-function closeDialog() {
-	$( "#confirmDialog" ).popup( "close" );
-	$( "#confirmDialog" ).remove();
+function showErrorDialog(title, msg) {
+	
+	var divPopup = document.createElement("DIV");
+	divPopup.setAttribute("data-role", "popup");
+	divPopup.setAttribute("id", "errorDialog");
+	divPopup.setAttribute("data-overlay-theme", "b");
+	divPopup.setAttribute("data-theme", "b");
+	divPopup.setAttribute("data-dismissible", "false");
+	divPopup.setAttribute("style", "max-width:400px;");
+	
+	var divHeader = document.createElement("DIV");
+	divHeader.setAttribute("data-role", "header");
+	divHeader.setAttribute("data-theme", "a");
+	divHeader.setAttribute("role", "banner");
+	divHeader.setAttribute("class", "ui-header ui-bar-d");
+	
+	var h1 = document.createElement("H1");
+	h1.setAttribute("class", "ui-title");
+	h1.setAttribute("role", "heading");
+	h1.innerHTML = title;
+	
+	var divMain = document.createElement("DIV");
+	divMain.setAttribute("role", "main");
+	divMain.setAttribute("class", "ui-content");
+	
+	var h3 = document.createElement("H4");
+	//h3.setAttribute("class", "ui-title");
+	h3.innerHTML = msg;
+	
+	var a1 = document.createElement("A");
+	a1.setAttribute("href", "javascript:closeDialog('errorDialog');");
+	a1.setAttribute("class", "ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b");
+	a1.innerHTML = "Aceptar";
+	
+	divPopup.appendChild(divHeader);
+	divPopup.appendChild(divMain);
+	divHeader.appendChild(h1);
+	divMain.appendChild(h3);
+	divMain.appendChild(a1);
+	
+	document.getElementById("content").appendChild(divPopup);
+	
+	// preparo el div
+	$( "#errorDialog" ).popup();
+	$( "#errorDialog" ).popup( "open", {transition: "flip"} );
+}
+
+function closeDialog(id) {
+	$( "#"+id ).popup( "close" );
+	$( "#"+id ).remove();
+}
+
+function createLoadMsg() {
+    var $this = $( this ),
+        theme = $this.jqmData( "theme" ) || $.mobile.loader.prototype.options.theme,
+        msgText = "Cargando...",
+        textVisible = "true",
+        textonly = !!$this.jqmData( "textonly" );
+        html = $this.jqmData( "html" ) || "";
+    $.mobile.loading( "show", {
+            text: msgText,
+            textVisible: textVisible,
+            theme: theme,
+            textonly: textonly,
+            html: html
+    });
+}
+
+function destroyMsg() {
+	$.mobile.loading( "hide" );
 }
 
 
