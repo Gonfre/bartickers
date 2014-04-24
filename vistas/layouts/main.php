@@ -14,10 +14,12 @@
 		<script type="text/javascript" src="recursos/js/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript" src="recursos/js/jquery.mobile-1.4.2.min.js"></script>
 		<script type="text/javascript" src="recursos/js/barticker.js"></script>
+		<script type="text/javascript" src="recursos/js/peticiones.js"></script>
 		
 		<link rel="stylesheet" type='text/css' href="recursos/css/jquery.mobile.structure-1.4.2.min.css"/>
 		<link rel="stylesheet" type='text/css' href="recursos/themes/jquery.mobile.icons.min.css"/>
 		<link rel="stylesheet" type='text/css' href="recursos/themes/barticker-green.css"/>
+		<link rel="stylesheet" type='text/css' href="recursos/css/barticker.css"/>
 		<link rel="stylesheet" type='text/css' href="recursos/css/albums.css"/>
 		<link rel="stylesheet" type='text/css' href="recursos/css/responsive.css"/>
 		

@@ -1,0 +1,15 @@
+@CHARSET "ISO-8859-1";
+
+div.bgboy {
+	background: url("../imgs/boy.png") no-repeat right top;
+}
+
+.ui-icon-save:after {
+    background-image: url("../imgs/save-white.png");
+    /* Make your icon fit *
+    background-size: 18px 18px;*/
+}
+
+.ui-alt-icon .ui-icon-save:after {
+	background-image: url("../imgs/save-black.png");
+}
