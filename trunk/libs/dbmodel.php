@@ -175,7 +175,7 @@ class DbModel {
 		
 			try {
 				$this->conn->preparar("SELECT * FROM $this->tableName WHERE $condiciones $orders");
-				$this->result = $this->conn->ejecutar(array_values($this->conditionFields));
+				$this->result = $this->conn->ejecutar($this->conditionFields);
 			} catch (Exception $e) {
 				throw $e;
 				return false;
@@ -359,7 +359,7 @@ class DbModel {
 		}
 		
 		try {
-			$this->result = $this->conn->ejecutar(array_values($this->fieldsByName));
+			$this->result = $this->conn->ejecutar($this->fieldsByName);
 		} catch (Exception $e) {
 			throw $e;
 			return false;
