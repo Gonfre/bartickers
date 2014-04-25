@@ -355,12 +355,13 @@ class DbConnection {
  			return pg_execute($this->connection, $this->prepareStatement, $values);
  			
  		} elseif ($this->driver == "MYSQL") {
- 			
  			if ($this->prepareStatement->execute()) {
+ 				$this->myFirePhp->log("OK");
  				$res = $this->prepareStatement->get_result();
  				$this->prepareStatement->close(); 	
  				return $res;
  			} else {
+ 				$this->myFirePhp->log("KO: " . $this->getLastError());
  				return NULL;
  			} 
  			
@@ -595,7 +596,7 @@ class DbConnection {
  			
  		} elseif ($this->driver == "MYSQL") {
  			
- 			return mysql_num_rows($result);
+ 			return $this->prepareStatement->num_rows;
  			
  		} elseif ($this->driver == "DB2") {
  			
@@ -718,14 +719,33 @@ class DbConnection {
 	 * @return void.
 	 */
 	public function bindParams($values) {
+		
 		if ($this->driver == "PGSQL") {
 	
 			// N/A
 	
 		} elseif ($this->driver == "MYSQL") {
-	
-			foreach ($values as $key => $value) {
-				$this->prepareStatement->bind_param("s", $value);
+			
+			if ($this->prepareStatement) {
+				$types = "";
+				$nuevo = array();
+				for ($i=0; $i < count($values); $i++) {
+					$key = array_keys($values)[$i];
+					$value = $values[$key];
+					
+					$b = ($key == "id") || (strpos($key, "_id")!== false) || (strpos($key, "id_")!== false);
+					$t = ($b ? "i" : "s");
+					$types = $types . $t;
+
+					$nuevo = array_merge($nuevo, array(& $values[$key] ));
+				}
+				array_unshift($nuevo, $types);
+				
+				
+				if (!call_user_func_array(array($this->prepareStatement, 'bind_param'), $nuevo)) {
+					$this->myFirePhp->log("ERROR EN BIND");
+				}
+				//$this->prepareStatement->bind_param("s", $value);
 			}
 	
 		} elseif ($this->driver == "DB2") {
