@@ -208,3 +208,18 @@ function tapBox() {
 		$( event.target ).parent().parent().addClass( "tap" );
 	}	
 }
+
+function changeColor(item){
+	var nombre = $(item).attr("nombre");	
+	if(nombre == "coloreadoa"){
+		$(item).attr("nombre","coloreadoc");
+		$(item).removeClass("ui-btn-a").addClass("ui-btn-c");
+	}
+	else if(nombre == "coloreadoc"){
+		$(item).attr("nombre","coloreadoa");
+		$(item).removeClass("ui-btn-c").addClass("ui-btn-a");
+	}
+	else{
+		$(item).attr("nombre","coloreadoa");
+	}
+}
