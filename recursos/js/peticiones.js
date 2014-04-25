@@ -6,13 +6,14 @@
 /********************* PROFILE *********************/
 function saveBasicData() {
 	createLoadMsg();
-	
+	//alert(document.getElementById("txtlocation").parentNode);
+	//alert($("#txtLocation").parent().children(":first").children(":first").children(":first").val());
 	$.ajax({
 		type: "POST",
 		url: "profile/xSaveBasicData",
 		data: {
 			phone: $("#txtPhone").val(), 
-			location: inputLocation.val(), 
+			location: $("#txtLocation").parent().children(":first").children(":first").children(":first").val(), 
 			notif: ($("#checkNotif").is(":checked") ? "Y" : "N")
 		}
 	})

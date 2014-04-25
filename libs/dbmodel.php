@@ -315,6 +315,10 @@ class DbModel {
 		}
 
 		$this->result = $this->conn->preparar("SELECT * FROM $this->tableName WHERE $field $comp $1");
+		if (!$this->result) {
+			return false;
+		}
+		
 		try {
 			$this->result = $this->conn->ejecutar(array($value));
 		} catch (Exception $e) {
@@ -342,14 +346,17 @@ class DbModel {
 		for ($i=0; $i<count($keys); $i=$i+1) {
 			if ($i > 0) {
 				$campos = $campos . ", " . $keys[$i];
-				$valores = $valores . ", $" . ($i+1);
+				$valores = $valores . ", " . $this->conn->getPreparedStatementVar($i+1);
 			} else {
-				$valores = "$" . ($i+1);
+				$valores = $this->conn->getPreparedStatementVar($i+1);
 				$campos = $keys[$i];
 			}
 		}
 
 		$this->result = $this->conn->preparar("INSERT INTO $this->tableName ($campos) VALUES ($valores)");
+		if (!$this->result) {
+			return false;
+		}
 		
 		try {
 			$this->result = $this->conn->ejecutar(array_values($this->fieldsByName));
@@ -381,16 +388,22 @@ class DbModel {
 		$keys = array_keys($this->fieldsByName);
 		for ($i=0; $i<count($keys); $i=$i+1) {
 			if ($i > 0) {
-				$campos = $campos . ", " . $keys[$i] . "=$" . ($i+1);
+				$campos = $campos . ", " . $keys[$i] . "=" . $this->conn->getPreparedStatementVar($i+1);
 			} else {
-				$campos = $keys[$i] . "=$" . ($i+1);
+				$campos = $keys[$i] . "=" . $this->conn->getPreparedStatementVar($i+1);
 			}
 		}
 
 		$this->result = $this->conn->preparar("UPDATE $this->tableName SET $campos WHERE $this->idField=$this->id");
+		if (!$this->result) {
+			return false;
+		}
 		
 		try {
-			$this->result = $this->conn->ejecutar(array_values($this->fieldsByName));
+			$this->result = $this->conn->ejecutar($this->fieldsByName);
+			if (is_null($this->result)) {
+				return false;
+			}
 		} catch (Exception $e) {
 			throw $e;
 			return false;
@@ -683,14 +696,17 @@ class DbModel {
 	*/
 	public function getForeign($tableName, $fieldName = null) {
 		$tableName = strtolower($tableName);
+		
 		if ($fieldName == null) {
 			$fieldName = "id_$tableName";
 			if ($tableName[strlen($tableName)-1] == "s")
 				$fieldName = substr($fieldName, 0, strlen($fieldName)-1);
 		}
-	
+		
+		require_once("modelos/$tableName.php");
+		$tableName[0] = strtoupper($tableName[0]);
 		if (!class_exists($tableName))
-			throw new Exception("Tabla no existe");
+			throw new Exception("Tabla no existe ($tableName)");
 		else {
 			$cc = new $tableName;
 			$cc->doSelectOne( $this->getValue( $fieldName ) );
@@ -712,7 +728,7 @@ class DbModel {
 		@return int
 	*/
 	public function getLastId() {
-		if ($this->execQuery("SELECT MAX(id) FROM ".$this->tableName)) {
+		if ($this->execQuery("SELECT MAX($this->idField) FROM ".$this->tableName)) {
 			if ($this->next()) {
 				return $this->getValueByPos(0);
 			} else {

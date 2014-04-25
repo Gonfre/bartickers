@@ -63,7 +63,7 @@ $( document ).on( "pagecreate", "#page", function() {
 			</div>
 		</li>
 		<li>
-			<ul id="txtLocation" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Buscar un lugar..." data-filter-theme="a"></ul>
+			<ul id="txtLocation" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="<?php echo (isset($this->location) ? $this->location : "Buscar un lugar...");?>" data-filter-theme="a"></ul>
 	    </li>
 	</ul>
 	
