@@ -6,6 +6,7 @@ require_once("libs/i18n.php");
 require_once("modelos/users.php");
 require_once("modelos/albums.php");
 require_once("modelos/album_stickers.php");
+require_once("modelos/locations.php");
 
 class ProfileController extends Controller {
 	
@@ -25,6 +26,9 @@ class ProfileController extends Controller {
 			$this->email = $u->getValue("email");
 			$this->locationId = $u->getValue("location_id");
 			$this->notif = $u->getValue("notif");
+			if ($this->locationId != 0) {
+				$this->location = $u->getForeign("locations", "location_id")->getValue("location_name");
+			}
 			
 			$this->albums = new Albums();
 			$this->albums->addCondition("user_id", $u->getId());
@@ -41,11 +45,40 @@ class ProfileController extends Controller {
 	
 	//Funciones sin vistas
 	public function xSaveBasicData() {
+		
 		$phone = $_REQUEST["phone"];
 		$location = $_REQUEST["location"];
 		$notif = $_REQUEST["notif"];
 		
-		echo "KO";
+		//Si el usuario colocó location
+		if ($location != "") {
+			$l = new Locations();
+			$l->addCondition("location_name", $location);
+			if ($l->doSelectAll()) {
+				if (!$l->next()) { //no existe
+					$l->clear();
+					$l->setValue("location_name", $location);
+					if ($l->doSave()) {
+						$locId = $l->getId();
+					}
+				} else {
+					$locId = $l->getId();
+				}
+			}
+		}
+		
+		//continuo...
+		$u = new Users(2);
+		$u->setValue("notif", $notif);
+		//<<<< Aca va el numero de telf
+		if (isset($locId)) {
+			$u->setValue("location_id", $locId);
+		}
+		if ($u->doUpdate()) {
+			return "OK";
+		} else {
+			echo "KO";
+		}
 	}
 }
 
