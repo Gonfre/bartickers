@@ -414,10 +414,10 @@ class DbModel {
 	}
 
 
-    /** Realiza un DELETE en la BD.
+    /** Realiza un DELETE del registro en la BD.
         @return bool
     */
-    public function doDelete() {
+    public function doDeleteIt() {
 		if ($this->tableName == null) {
 			throw new Exception ("Tabla no especificada");
 			return false;
@@ -436,6 +436,42 @@ class DbModel {
 		$this->clear();
 		return true;
 	}
+	
+	/** 
+	 * Realiza un DELETE en la BD. Retorna todos los que coincidan.
+	 * @return bool.
+	 */
+	public function doDeleteAll() {
+		if ($this->tableName == null) {
+			throw new Exception ("Tabla no especificada");
+			return false;
+		}
+		
+		$condiciones = $this->getConditions();
+		
+		$orders = $this->getOrders();
+		
+		if ($condiciones == null) {
+			try {
+				$this->result = $this->conn->ejecutarSQL("xxxxxDELETE FROM $this->tableName $orders");
+			} catch (Exception $e) {
+				throw $e;
+				return false;
+			}
+		} else {
+		
+			try {
+				$this->conn->preparar("DELETE FROM $this->tableName WHERE $condiciones $orders");
+				$this->result = $this->conn->ejecutar($this->conditionFields);
+			} catch (Exception $e) {
+				throw $e;
+				return false;
+			}
+		}
+		
+		$this->clear();
+		return true;
+	}
 
 
     /** Realiza un DELETE en la BD para todos los registros que cumplan con la condicion dada.
@@ -444,7 +480,7 @@ class DbModel {
         @param compType Tipo de comparación (Igual, Menor, Mayor, Menor o igual, Mayor o igual).
         @return bool
     */
-    public function doDeleteAll($field, $value, $compType = DB_EQUAL) {
+    public function doDeleteAllWithCondition($field, $value, $compType = DB_EQUAL) {
 		if ($this->tableName == null) {
 			throw new Exception ("Tabla no especificada");
 			return false;

@@ -108,6 +108,7 @@ $( document ).on( "pagecreate", "#page", function() {
 		</li>
 	<?php
 	while ($this->albums->next()) {
+		$i = $this->albums->getValue("album_id");
 		$n = $this->albums->getValue("album_name");
 		$t = $this->albums->getValue("stickers");
 		$s = new Album_stickers();
@@ -117,28 +118,30 @@ $( document ).on( "pagecreate", "#page", function() {
 		}
 		echo '<li>';
 		echo '  <a href="#"><label>'.$n.'</label></p><span class="ui-li-count">'.$c.'/'.$t.'</span></a>';
-		echo '  <a href="#" onclick="javascript:showConfirmDialog(\'Eliminar?\',\'Desea eliminar el album '.$n.'?\', \'Esto no se puede deshacer.\', \'alert(1)\');" data-rel="popup" data-position-to="window" data-transition="flip"></a>';
+		echo '  <a href="#" onclick="javascript:showConfirmDialog(\'Eliminar?\',\'Desea eliminar el album &quot;'.$n.'&quot;?\', \'Esto no se puede deshacer.\', \'alert('.$i.')\');" data-rel="popup" data-position-to="window" data-transition="flip"></a>';
 		echo '</li>';
 	}
 	?>
 	</ul>
 	
 	<!-- Sitios de trueque -->
-	<ul data-role="listview" data-split-icon="delete" data-theme="a" data-divider-theme="a" data-count-theme="c" data-inset="true">
+	<ul id="ulLocations" data-role="listview" data-split-icon="delete" data-theme="a" data-divider-theme="a" data-count-theme="c" data-inset="true">
 		<li data-role="list-divider">
 			<div class="ui-bar ui-bar-a" style="border:0px;">
 			    <label><strong>Mis sitios de trueque</strong></label>
 			    <a href="#popupLogin" data-rel="popup" data-position-to="window" data-icon="plus" class="ui-btn-right" data-iconpos="notext">Agregar</a>
 			</div>
 		</li>
-		<li>
-			<a href="#"><label>Medellin, AN, Colombia</label></a>
-	    	<a  href="#confirmDialog" onclick="javascript:showConfirmDialog('Eliminar?','Desea eliminar la ubicacion Medellin, AN, Colombia?', 'Esto no se puede deshacer.', 'alert(1)');" data-rel="popup" data-position-to="window" data-transition="flip"></a>
-	    </li>
-	    <li>
-	    	<a href="#"><label>Envigado, AN, Colombia</label></a>
-	        <a  href="#confirmDialog" onclick="javascript:showConfirmDialog('Eliminar?','Desea eliminar la ubicacion Envigado, AN, Colombia?', 'Esto no se puede deshacer.', 'alert(1)');" data-rel="popup" data-position-to="window" data-transition="flip"></a>
-	    </li>
+	<?php 
+	while ($this->userLocations->next()) {
+		$n = $this->userLocations->getValue("location_name");
+		$i = $this->userLocations->getValue("location_id");
+		echo '<li id="liLocation-'.$i.'">';
+		echo '	<a href="#"><label>'.$n.'</label></a>';
+		echo '	<a href="#confirmDialog" onclick="javascript:showConfirmDialog(\'Eliminar?\',\'Desea eliminar la ubicacion &quot;'.$n.'&quot;?\', \'Esto no se puede deshacer.\', \'deleteIt(\\\'location\\\','.$i.')\');" data-rel="popup" data-position-to="window" data-transition="flip"></a>';
+		echo '</li>';
+	}
+	?>
 	</ul>
 	  
   </div>
@@ -158,13 +161,7 @@ $( document ).on( "pagecreate", "#page", function() {
 	<div class="ui-content" role="main">
 		<p>Seleccione una ubicacion:</p>
 		<ul id="txtNewPlace" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Buscar un lugar..." data-filter-theme="a"></ul>
-		<div class="ui-grid-a">
-			<div class="ui-block-a">
-				<a href="#" class="ui-btn ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b" data-mini="true">OK</a>
-			</div>
-			<div class="ui-block-b">
-				<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b" data-rel="back">Cancelar</a>
-			</div>
-		</div>
+		<a href="#" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext">Ok</a>
+		<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext" data-rel="back">Cancel</a>
 	</div>
 </div>

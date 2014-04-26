@@ -7,6 +7,7 @@ require_once("modelos/users.php");
 require_once("modelos/albums.php");
 require_once("modelos/album_stickers.php");
 require_once("modelos/locations.php");
+require_once("modelos/user_locations.php");
 
 class ProfileController extends Controller {
 	
@@ -14,6 +15,7 @@ class ProfileController extends Controller {
 		$this->layout = "main";
 		$this->titleShowed = "Mi Perfil";
 		$this->pageTitle = "Mi Perfil";
+		//$this->nivelesPermitidos = array(2);
 	}
 	
 	public function index() {
@@ -30,11 +32,15 @@ class ProfileController extends Controller {
 				$this->location = $u->getForeign("locations", "location_id")->getValue("location_name");
 			}
 			
+			//albums
 			$this->albums = new Albums();
 			$this->albums->addCondition("user_id", $u->getId());
-			if ($this->albums->doSelectAllWithForeign("album_types", "album_type", DB_SAME_FIELD)) {
-			}
+			$this->albums->doSelectAllWithForeign("album_types", "album_type", DB_SAME_FIELD);
 			
+			//user locations
+			$this->userLocations = new User_locations();
+			$this->userLocations->addCondition("user_id", $u->getId());
+			$this->userLocations->doSelectAllWithForeign("locations", "location_id", DB_SAME_FIELD);
 		}
 	}
 	
@@ -43,12 +49,20 @@ class ProfileController extends Controller {
 	}
 	
 	
-	//Funciones sin vistas
+	/*************************************************
+	 * Funciones sin vistas
+	 *************************************************/
+	 
+	/**
+	 * Guarda los datos básicos del usuario
+	 * @var phone Teléfono del usuario
+	 * @var location Ubicación del usuario
+	 * @var notif Notificaciones por email: Y/N
+	 * @return string
+	 */
 	public function xSaveBasicData() {
 		
-		$phone = $_REQUEST["phone"];
-		$location = $_REQUEST["location"];
-		$notif = $_REQUEST["notif"];
+		extract($_REQUEST);
 		
 		//Si el usuario colocó location
 		if ($location != "") {
@@ -78,6 +92,34 @@ class ProfileController extends Controller {
 			return "OK";
 		} else {
 			echo "KO";
+		}
+	}
+	
+	
+	/**
+	 * Elimina un album o una location del usuario
+	 * @var type Tipo a eliminar: album, location 
+	 * @var id ID a eliminar
+	 * @return string
+	 */
+	public function xDeleteSomething() {
+		extract($_REQUEST);
+		
+		$ok = false;
+		if ($type == "album") {
+			$o = new Albums($id);
+			$ok = $o->doDelete(); 
+		} else {
+			$o = new User_locations();
+			$o->addCondition("user_id", 2);
+			$o->addCondition("location_id", $id);
+			$ok = $o->doDeleteAll();
+		}
+		
+		if ($ok) {
+			return "OK";
+		} else {
+			return "KO";
 		}
 	}
 }
