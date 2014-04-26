@@ -1,7 +1,23 @@
+<script type="text/javascript" src="http://gd.geobytes.com/gd?after=-1&variables=GeobytesCode,GeobytesInternet,GeobytesCity,GeobytesCountry,GeobytesRegion"></script>
 <script type="text/javascript">
 <!--
+var initLocation = function ( response ) {
+	val = response.geonames[0];
+	var texto = val.name + (val.adminName1 ? (val.adminName1 != val.name ? ", "+val.adminName1 : "") : "") + ", " + val.countryName;
+    //eval(callback + "('"+texto+"')");
+    //alert(texto);
+    //alert( $("#txtLocation").parent().children(":first").children(":first").children(":first").val() );
+    $("#txtLocation").parent().children(":first").children(":first").children(":first").val(omitirAcentos(texto));
+}
+
 $( document ).on( "pagecreate", "#page", function() {
-    loadGeoData("txtLocation");
+	loadGeoData("txtLocation");
+	loadGeoData("txtNewPlace");
+
+    if ("<?php echo (isset($this->location) ? $this->location : ""); ?>" == "") {
+		//$("#txtLocation").parent().children(":first").children(":first").children("first").val(sGeobytesCity + ", " + sGeobytesCountry);
+		getPlaces( sGeobytesCity+","+sGeobytesRegion, sGeobytesCity, sGeobytesInternet, initLocation);
+	}
 });
 //-->
 </script>
@@ -112,7 +128,7 @@ $( document ).on( "pagecreate", "#page", function() {
 		<li data-role="list-divider">
 			<div class="ui-bar ui-bar-a" style="border:0px;">
 			    <label><strong>Mis sitios de trueque</strong></label>
-			    <a href="#" data-icon="plus" class="ui-btn-right" data-iconpos="notext">Agregar</a>
+			    <a href="#popupLogin" data-rel="popup" data-position-to="window" data-icon="plus" class="ui-btn-right" data-iconpos="notext">Agregar</a>
 			</div>
 		</li>
 		<li>
@@ -131,4 +147,24 @@ $( document ).on( "pagecreate", "#page", function() {
 
 <br />
 
+</div>
+
+
+<!-- Popups -->
+<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+	<div data-role="header" data-theme="a" role="banner" class="ui-header ui-bar-a">
+		<h1 class="ui-title" role="heading">Agregar ubicacion</h1>
+	</div>
+	<div class="ui-content" role="main">
+		<p>Seleccione una ubicacion:</p>
+		<ul id="txtNewPlace" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Buscar un lugar..." data-filter-theme="a"></ul>
+		<div class="ui-grid-a">
+			<div class="ui-block-a">
+				<a href="#" class="ui-btn ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b" data-mini="true">OK</a>
+			</div>
+			<div class="ui-block-b">
+				<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b" data-rel="back">Cancelar</a>
+			</div>
+		</div>
+	</div>
 </div>
