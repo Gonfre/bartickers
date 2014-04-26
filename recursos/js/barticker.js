@@ -108,34 +108,21 @@ function showConfirmDialog(title, msg, msg2, action) {
 	
 	var a1 = document.createElement("A");
 	a1.setAttribute("href", "javascript:closeDialog('confirmDialog');");
-	a1.setAttribute("class", "ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b");
-	a1.innerHTML = "Cancelar";
+	a1.setAttribute("class", "ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext");
+	a1.innerHTML = "Cancel";
 	
 	var a2 = document.createElement("A");
 	a2.setAttribute("href", "javascript:"+action);
-	a2.setAttribute("class", "ui-btn ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b");
-	a2.innerHTML = "Aceptar";
-	
-	var grid = document.createElement("DIV");
-	grid.setAttribute("class", "ui-grid-a");
-	
-	var g1 = document.createElement("DIV");
-	g1.setAttribute("class", "ui-block-a");
-	
-	var g2 = document.createElement("DIV");
-	g2.setAttribute("class", "ui-block-b");
-	
+	a2.setAttribute("class", "ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext");
+	a2.innerHTML = "Ok";
 	
 	divPopup.appendChild(divHeader);
 	divPopup.appendChild(divMain);
 	divHeader.appendChild(h1);
 	divMain.appendChild(h3);
 	divMain.appendChild(p);
-	divMain.appendChild(grid);
-	grid.appendChild(g1);
-	grid.appendChild(g2);
-	g1.appendChild(a2);
-	g2.appendChild(a1);
+	divMain.appendChild(a2);
+	divMain.appendChild(a1);
 	
 	document.getElementById("content").appendChild(divPopup);
 	
@@ -175,8 +162,8 @@ function showErrorDialog(title, msg) {
 	
 	var a1 = document.createElement("A");
 	a1.setAttribute("href", "javascript:closeDialog('errorDialog');");
-	a1.setAttribute("class", "ui-btn ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b");
-	a1.innerHTML = "Aceptar";
+	a1.setAttribute("class", "ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext");
+	a1.innerHTML = "Ok";
 	
 	divPopup.appendChild(divHeader);
 	divPopup.appendChild(divMain);

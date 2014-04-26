@@ -4,10 +4,12 @@
 
 
 /********************* PROFILE *********************/
+
+/**
+ * Guarda los datos básicos del cliente
+ */
 function saveBasicData() {
 	createLoadMsg();
-	//alert(document.getElementById("txtlocation").parentNode);
-	//alert($("#txtLocation").parent().children(":first").children(":first").children(":first").val());
 	$.ajax({
 		type: "POST",
 		url: "profile/xSaveBasicData",
@@ -28,5 +30,34 @@ function saveBasicData() {
 	.fail(function() {
 		destroyMsg();
 		showErrorDialog("Error", "Error guardando datos");
+	});
+}
+
+/**
+ * Guarda los datos básicos del cliente
+ */
+function deleteIt(tipo, id) {
+	createLoadMsg();
+	closeDialog("confirmDialog");
+	$.ajax({
+		type: "POST",
+		url: "profile/xDeleteSomething",
+		data: {
+			type: tipo, 
+			id: id
+		}
+	})
+	.done(function( msg ) {
+		destroyMsg();
+		if (msg == "KO") {
+			showErrorDialog("Error", "Error guardando datos");
+		} else {
+			$("#liLocation-"+id).remove();
+			$("#ulLocations").listview("refresh");
+		}
+	})
+	.fail(function() {
+		destroyMsg();
+		showErrorDialog("Error", "Error eliminado los datos");
 	});
 }
