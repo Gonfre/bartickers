@@ -178,6 +178,38 @@ function showErrorDialog(title, msg) {
 	$( "#errorDialog" ).popup( "open", {transition: "flip"} );
 }
 
+function showAlbumsDialog(msg) {
+	
+	var divPopup = document.createElement("DIV");
+	divPopup.setAttribute("data-role", "popup");
+	divPopup.setAttribute("id", "albumsDialog");
+	divPopup.setAttribute("class", "ui-corner-all");
+	divPopup.setAttribute("data-theme", "a");
+	
+	var divMain = document.createElement("DIV");
+	divMain.setAttribute("role", "main");
+	divMain.setAttribute("class", "ui-content");
+	
+	var h3 = document.createElement("H3");
+	h3.setAttribute("class", "ui-title");
+	h3.innerHTML = msg;
+	
+	var a1 = document.createElement("A");
+	a1.setAttribute("href", "#");
+	a1.setAttribute("data-rel", "back");
+	a1.setAttribute("class", "ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right");
+	a1.innerHTML = "Close";
+	
+	divPopup.appendChild(divMain);
+	divPopup.appendChild(a1);
+	divMain.appendChild(h3);
+	document.getElementById("content").appendChild(divPopup);
+	
+	// preparo el div
+	$( "#albumsDialog" ).popup();
+	$( "#albumsDialog" ).popup( "open", {transition: "flip"} );
+}
+
 function closeDialog(id) {
 	$( "#"+id ).popup( "close" );
 	$( "#"+id ).remove();
@@ -215,23 +247,12 @@ function openMenuOnSwipe() {
 } 
 
 function holdTapBox() {
-	$(".box").bind( "taphold", tapholdHandler );
+	$("button.box").bind( "taphold", tapholdHandler );
 	
 	function tapholdHandler( event ){
 		//$( event.target ).parent().parent().addClass( "taphold" );
-		$( event.target ).parent().attr("href","#confirmDialog");
-		$( event.target ).parent().attr("data-rel","popup");
-		$( event.target ).parent().attr("data-position-to","window");
-		$( event.target ).parent().attr("data-transition","slidefade");
-		showConfirmDialog('001');
-	}	
-}
-
-function tapBox() {
-	$( ".box" ).bind( "tap", tapHandler );
-	 
-	function tapHandler( event ){
-		$( event.target ).parent().parent().addClass( "tap" );
+		showAlbumsDialog("pepito perez");
+		//showConfirmDialog('001');
 	}	
 }
 
@@ -242,10 +263,11 @@ function changeColor(item){
 		$(item).removeClass("ui-btn-a").addClass("ui-btn-c");
 	}
 	else if(nombre == "coloreadoc"){
-		$(item).attr("nombre","coloreadoa");
-		$(item).removeClass("ui-btn-c").addClass("ui-btn-a");
+		$(item).attr("nombre","coloreadod");
+		$(item).removeClass("ui-btn-c").addClass("ui-btn-d");
 	}
 	else{
 		$(item).attr("nombre","coloreadoa");
+		$(item).removeClass("ui-btn-d").addClass("ui-btn-a");
 	}
 }

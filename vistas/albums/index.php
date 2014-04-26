@@ -16,37 +16,37 @@
     </ul>
   </div>
   <div id="one">
-  <button nombre="coloreadoa" class="ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">001</button>  
-  <button nombre="coloreadoa" class="ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">002</button>
-  <button nombre="coloreadoa" class="ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">003</button>
-  <button nombre="coloreadoa" class="ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">004</button>
-  <button nombre="coloreadoa" class="ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">005</button>
-  <button nombre="coloreadoa" class="ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">006</button>
-  <button nombre="coloreadoa" class="ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">007</button>
-  <button nombre="coloreadoa" class="ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">008</button>
-  <button nombre="coloreadoa" class="ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">009</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">001</button>  
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">002</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">003</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">004</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">005</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">006</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">007</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">008</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">009</button>
   </div>
   <div id="two">
-	  <a data-role="button" data-theme="a" data-inline="true">201</a>
-	  <a data-role="button" data-theme="a" data-inline="true">202</a>
-	  <a data-role="button" data-theme="a" data-inline="true">203</a>
-	  <a data-role="button" data-theme="a" data-inline="true">204</a>
-	  <a data-role="button" data-theme="a" data-inline="true">205</a>
-	  <a data-role="button" data-theme="a" data-inline="true">206</a>
-	  <a data-role="button" data-theme="a" data-inline="true">207</a>
-	  <a data-role="button" data-theme="a" data-inline="true">208</a>
-	  <a data-role="button" data-theme="a" data-inline="true">209</a>  
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">201</button>  
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">202</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">203</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">204</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">205</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">206</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">207</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">208</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">209</button>  
   </div>
   <div id="three">
-	  <a data-role="button" data-theme="a" data-inline="true">301</a>
-	  <a data-role="button" data-theme="a" data-inline="true">302</a>
-	  <a data-role="button" data-theme="a" data-inline="true">303</a>
-	  <a data-role="button" data-theme="a" data-inline="true">304</a>
-	  <a data-role="button" data-theme="a" data-inline="true">305</a>
-	  <a data-role="button" data-theme="a" data-inline="true">306</a>
-	  <a data-role="button" data-theme="a" data-inline="true">307</a>
-	  <a data-role="button" data-theme="a" data-inline="true">308</a>
-	  <a data-role="button" data-theme="a" data-inline="true">309</a>  
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">301</button>  
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">302</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">303</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">304</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">305</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">306</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">307</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">308</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">309</button>  
   </div>
   <div id="four">
 	  <a data-role="button" data-theme="a" data-inline="true">401</a>
@@ -60,3 +60,6 @@
 	  <a data-role="button" data-theme="a" data-inline="true">409</a>
   </div>
 </div>
+<script>
+holdTapBox();
+</script>
