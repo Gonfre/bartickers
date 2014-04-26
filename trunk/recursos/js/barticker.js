@@ -1,6 +1,37 @@
 /**
  * 
  */
+function omitirAcentos(text) {
+    var acentos = "√¿¡ƒ¬»…À ÃÕœŒ“”÷‘Ÿ⁄‹€„‡·‰‚ËÈÎÍÏÌÔÓÚÛˆÙ˘˙¸˚—Ò«Á";
+    var original = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc";
+    for (var i=0; i<acentos.length; i++) {
+        text = text.replace(acentos.charAt(i), original.charAt(i));
+    }
+    return text;
+}
+
+
+function getPlaces( q, startWith, country, callback) {
+	$.ajax({
+    	url: "http://api.geonames.org/search",
+        dataType: "jsonp",
+        crossDomain: true,
+        data: {
+            q: q,
+            name_startsWith: startWith,
+            fuzzy: "4",
+            maxRows: "10",
+            username: "xionjames",
+            cities: "cities1000",
+            country: country,
+            featureClass: "P",
+            type: "json",
+            style: "FULL",
+            lang: "en"
+        }
+    })
+    .then( callback );
+}
 
 function loadGeoData(idText) {
 	$( "#"+idText ).on( "filterablebeforefilter", function ( e, data ) {
@@ -12,23 +43,17 @@ function loadGeoData(idText) {
         if ( value && value.length > 2 ) {
             $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
             $ul.listview( "refresh" );
-            $.ajax({
-                url: "http://gd.geobytes.com/AutoCompleteCity",
-                dataType: "jsonp",
-                crossDomain: true,
-                data: {
-                    q: inputLocation.val()
-                }
-            })
-            .then( function ( response ) {
-                $.each( response, function ( i, val ) {
+            getPlaces(inputLocation.val(), inputLocation.val(), sGeobytesInternet, function(response){
+            	$.each( response.geonames, function ( i, val ) {
                 	var li = document.createElement("LI");
                 	var a = document.createElement("A");
-                	a.innerHTML = val;
+                	var texto = val.name + (val.adminName1 ? (val.adminName1 != val.name ? ", "+val.adminName1 : "") : "") + ", " + val.countryName;
+                	texto = omitirAcentos(texto);
+                	a.innerHTML = texto;
                 	a.setAttribute("class", "ui-btn");
                 	a.setAttribute("rel", "dialog");
                 	a.onclick = function() {
-                		inputLocation.val( val );
+                		inputLocation.val( texto );
                         $ul.html( "" );
                         $ul.listview( "refresh" );
                         $ul.trigger( "updatelayout");
@@ -36,10 +61,11 @@ function loadGeoData(idText) {
                 	li.appendChild(a);
                 	$ul.append(li);
                 });
-                //$ul.html( html );
                 $ul.listview( "refresh" );
                 $ul.trigger( "updatelayout");
             });
+            
+            
         }
     });
 }
@@ -82,21 +108,34 @@ function showConfirmDialog(title, msg, msg2, action) {
 	
 	var a1 = document.createElement("A");
 	a1.setAttribute("href", "javascript:closeDialog('confirmDialog');");
-	a1.setAttribute("class", "ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b");
+	a1.setAttribute("class", "ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b");
 	a1.innerHTML = "Cancelar";
 	
 	var a2 = document.createElement("A");
 	a2.setAttribute("href", "javascript:"+action);
-	a2.setAttribute("class", "ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b");
+	a2.setAttribute("class", "ui-btn ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b");
 	a2.innerHTML = "Aceptar";
+	
+	var grid = document.createElement("DIV");
+	grid.setAttribute("class", "ui-grid-a");
+	
+	var g1 = document.createElement("DIV");
+	g1.setAttribute("class", "ui-block-a");
+	
+	var g2 = document.createElement("DIV");
+	g2.setAttribute("class", "ui-block-b");
+	
 	
 	divPopup.appendChild(divHeader);
 	divPopup.appendChild(divMain);
 	divHeader.appendChild(h1);
 	divMain.appendChild(h3);
 	divMain.appendChild(p);
-	divMain.appendChild(a2);
-	divMain.appendChild(a1);
+	divMain.appendChild(grid);
+	grid.appendChild(g1);
+	grid.appendChild(g2);
+	g1.appendChild(a2);
+	g2.appendChild(a1);
 	
 	document.getElementById("content").appendChild(divPopup);
 	
@@ -136,7 +175,7 @@ function showErrorDialog(title, msg) {
 	
 	var a1 = document.createElement("A");
 	a1.setAttribute("href", "javascript:closeDialog('errorDialog');");
-	a1.setAttribute("class", "ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b");
+	a1.setAttribute("class", "ui-btn ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b");
 	a1.innerHTML = "Aceptar";
 	
 	divPopup.appendChild(divHeader);
