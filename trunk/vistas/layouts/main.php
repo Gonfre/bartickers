@@ -63,7 +63,7 @@
 			    </fieldset>
 			    <hr />
 			    <fieldset data-role="controlgroup" data-mini="true">
-			    	<a href="inicio" rel="external" class="ui-btn ui-corner-all ui-btn-a ui-icon-power ui-btn-icon-left">Salir</a>
+			    	<a href="home" rel="external" class="ui-btn ui-corner-all ui-btn-a ui-icon-power ui-btn-icon-left">Salir</a>
 			    </fieldset>
 			</div>
 			
