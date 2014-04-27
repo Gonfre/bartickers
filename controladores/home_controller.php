@@ -2,7 +2,7 @@
 
 require_once("libs/controller.php");
 
-class InicioController extends Controller {
+class HomeController extends Controller {
 	
 	public function __construct() {
 		$this->layout = "noMenu";
