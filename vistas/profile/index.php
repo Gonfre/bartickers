@@ -117,7 +117,7 @@ $( document ).on( "pagecreate", "#page", function() {
 			$c = $s->getValueByPos(0);
 		}
 		echo '<li>';
-		echo '  <a href="#"><label>'.$n.'</label></p><span class="ui-li-count">'.$c.'/'.$t.'</span></a>';
+		echo '  <a href="#"><label>'.$n.'</label><span class="ui-li-count">'.$c.'/'.$t.'</span></a>';
 		echo '  <a href="#" onclick="javascript:showConfirmDialog(\'Eliminar?\',\'Desea eliminar el album &quot;'.$n.'&quot;?\', \'Esto no se puede deshacer.\', \'alert('.$i.')\');" data-rel="popup" data-position-to="window" data-transition="flip"></a>';
 		echo '</li>';
 	}
@@ -173,15 +173,16 @@ $( document ).on( "pagecreate", "#page", function() {
 	</div>
 	<div class="ui-content" role="main">
 		<p>Seleccione un &aacute;lbum:</p>
-		<ul id="txtNewAlbum" data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="false" data-filter-placeholder="Buscar un &aacute;lbum..." data-filter-theme="a">
+		<ul id="txtNewAlbum" data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Buscar un &aacute;lbum..." data-filter-theme="a">
 		<?php
 		while ($this->albumTypes->next()) {
 			$i = $this->albumTypes->getValue("album_type");
-			$n = $this->albumTypes->getValue("short_name");
+			$sn = $this->albumTypes->getValue("short_name");
+			$n = $this->albumTypes->getValue("name");
 			$s = $this->albumTypes->getValue("stickers");
 			
-			echo '<li id="liAlbum-'.$i.'">';
-			echo '  <a href="#"><label>'.$n.'</label></p><span class="ui-li-count">'.$s.'</span></a>';
+			echo '<li id="liAlbum-'.$i.'" data-icon="false">';
+			echo '  <a href="#"><p><strong>'.$sn.'</strong></p><p>'.$n.'</p><span class="ui-li-count">'.$s.'</span></a>';
 			echo '</li>';
 		}
 		?>
