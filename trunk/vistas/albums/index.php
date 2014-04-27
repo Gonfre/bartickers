@@ -16,37 +16,91 @@
     </ul>
   </div>
   <div id="one">
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">001</button>  
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">002</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">003</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">004</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">005</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">006</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">007</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">008</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">009</button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">001
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>  
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">002
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">003
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">004
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">005
+	 	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">006
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">007
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">008
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">009
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
   </div>
   <div id="two">
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">201</button>  
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">202</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">203</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">204</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">205</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">206</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">207</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">208</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">209</button>  
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">101
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>  
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">102
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">103
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">104
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">105
+	 	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">106
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">107
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">108
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">109
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>  
   </div>
   <div id="three">
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">301</button>  
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">302</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">303</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">304</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">305</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">306</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">307</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">308</button>
-	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">309</button>  
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">201
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>  
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">202
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">203
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">204
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">205
+	 	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">206
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">207
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">208
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>
+	  <button nombre="coloreadoa" class=" box ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" onclick="javascript:changeColor(this);">209
+	  	<span class="ui-li-count ui-body-c span-count">0</span>
+	  </button>  
   </div>
   <div id="four">
 	  <a data-role="button" data-theme="a" data-inline="true">401</a>

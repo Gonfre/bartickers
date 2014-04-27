@@ -266,13 +266,19 @@ function changeColor(item){
 	if(nombre == "coloreadoa"){
 		$(item).attr("nombre","coloreadoc");
 		$(item).removeClass("ui-btn-a").addClass("ui-btn-c");
+		$(item).children().text("1");
 	}
 	else if(nombre == "coloreadoc"){
 		$(item).attr("nombre","coloreadod");
 		$(item).removeClass("ui-btn-c").addClass("ui-btn-d");
+		$(item).children().text("2");
 	}
 	else{
-		$(item).attr("nombre","coloreadoa");
-		$(item).removeClass("ui-btn-d").addClass("ui-btn-a");
+		/*$(item).attr("nombre","coloreadoa");
+		$(item).removeClass("ui-btn-d").addClass("ui-btn-a");*/
+		var valor = parseInt($(item).children().text());	
+		$(item).children().text(function() {
+			  return valor + 1;
+			});
 	}
 }

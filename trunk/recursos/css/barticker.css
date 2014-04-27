@@ -13,3 +13,9 @@ div.bgboy {
 .ui-alt-icon .ui-icon-save:after {
 	background-image: url("../imgs/save-black.png");
 }
+span.span-count{
+	position: static;
+	margin-right: -12px;
+	margin-left: 2px;
+	border-radius: .750em;
+}
