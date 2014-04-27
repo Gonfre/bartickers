@@ -27,6 +27,7 @@ class ProfileController extends Controller {
 		if ($u->next()) {
 			$this->name = $u->getValue("user_name");
 			$this->email = $u->getValue("email");
+			$this->telephone = $u->getValue("telephone");
 			$this->locationId = $u->getValue("location_id");
 			$this->notif = $u->getValue("notif");
 			if ($this->locationId != 0) {
@@ -63,25 +64,19 @@ class ProfileController extends Controller {
 	 * @var phone Teléfono del usuario
 	 * @var location Ubicación del usuario
 	 * @var notif Notificaciones por email: Y/N
-	 * @return string
 	 */
 	public function xSaveBasicData() {
-		
 		extract($_REQUEST);
 		
 		//Si el usuario colocó location
 		if ($location != "") {
-			$l = new Locations();
-			$l->addCondition("location_name", $location);
-			if ($l->doSelectAll()) {
-				if (!$l->next()) { //no existe
-					$l->clear();
-					$l->setValue("location_name", $location);
-					if ($l->doSave()) {
-						$locId = $l->getId();
-					}
-				} else {
-					$locId = $l->getId();
+			//busco la location si existe
+			$locId = $this->getLocationId($location);
+			if ($locId == -1) { // no existe
+				$l = new Locations();
+				$l->setValue("location_name", $location);
+				if ($l->doSave()) {
+					$locId = $this->getLocationId($location);
 				}
 			}
 		}
@@ -89,12 +84,12 @@ class ProfileController extends Controller {
 		//continuo...
 		$u = new Users(2); //<<<< LocalUser
 		$u->setValue("notif", $notif);
-		//<<<< Aca va el numero de telf
+		$u->setValue("telephone", $phone);
 		if (isset($locId)) {
 			$u->setValue("location_id", $locId);
 		}
 		if ($u->doUpdate()) {
-			return "OK";
+			echo "OK";
 		} else {
 			echo "KO";
 		}
@@ -105,7 +100,6 @@ class ProfileController extends Controller {
 	 * Elimina un album o una location del usuario
 	 * @var type Tipo a eliminar: album, location 
 	 * @var id ID a eliminar
-	 * @return string
 	 */
 	public function xDeleteSomething() {
 		extract($_REQUEST);
@@ -113,7 +107,7 @@ class ProfileController extends Controller {
 		$ok = false;
 		if ($type == "album") {
 			$o = new Albums($id);
-			$ok = $o->doDelete(); 
+			$ok = $o->doDeleteIt(); 
 		} else if ($type == "location") {
 			$o = new User_locations();
 			$o->addCondition("user_id", 2); //<<<< LocalUser
@@ -133,35 +127,38 @@ class ProfileController extends Controller {
 	 * Agrega un album o location al usuario
 	 * @var type Tipo a eliminar: album, location 
 	 * @var text Texto a guardar
-	 * @return string
 	 */
 	public function xAddSomething() {
 		extract($_REQUEST);
 		
 		$ok = "KO";
 		if ($type == "album") {
-			
+			$a = new Albums();
+			$a->setValue("user_id", 2); //LocalUser
+			$a->setValue("album_type", $id);
+			$a->setValue("album_name", $text);
+			$a->setValue("ini_date", "%NOW()");
+			if ($a->doSave()) {
+				$ok = $a->getId();
+			} else {
+				$ok = "YA";
+			}
 		} else if ($type == "location") {
 			//busco la location si existe
-			$l = new Locations();
-			$l->addCondition("location_name", $text);
-			if ($l->doSelectAll()) {
-				if (!$l->next()) { //no existe
-					$l->clear();
-					$l->setValue("location_name", $text);
-					if ($l->doSave()) {
-						$locId = $l->getId();
-					}
-				} else {
-					$locId = $l->getId();
+			$locId = $this->getLocationId($text);
+			if ($locId == -1) { // no existe
+				$l = new Locations();
+				$l->setValue("location_name", $text);
+				if ($l->doSave()) {
+					$locId = $this->getLocationId($text);
 				}
 			}
 			
 			//actualizo la user_location
-			$this->ul = new User_locations();
-			$this->ul->setValue("user_id", 2); //<<<< LocalUser
-			$this->ul->setValue("location_id", $locId);
-			if ($this->ul->doSave()) {
+			$ul = new User_locations();
+			$ul->setValue("user_id", 2); //<<<< LocalUser
+			$ul->setValue("location_id", $locId);
+			if ($ul->doSave()) {
 				$ok = "$locId";
 			} else {
 				$ok = "YA";
@@ -169,6 +166,40 @@ class ProfileController extends Controller {
 		}
 		
 		echo $ok;
+	}
+	
+	/**
+	 * Almacena la lcoation (GPS) del usuario
+	 * @var lat Latitud
+	 * @var lon longitud
+	 */
+	public function xSaveUserLocation() {
+		extract($_REQUEST);
+		
+		$u = new Users(2); //<<<< LocalUser
+		$u->setValue("latitude", $lat);
+		$u->setValue("longitude", $lon);
+		
+		if ($u->doUpdate()) {
+			echo "OK";
+		} else {
+			echo "KO";
+		}
+	}
+	
+	
+	private function getLocationId($locName) {
+		$l = new Locations();
+		$l->addCondition("location_name", $locName);
+		if ($l->doSelectAll()) {
+			if (!$l->next()) { //no existe
+				return -1;
+			} else {
+				return $l->getId();
+			}
+		} else {
+			return -1;
+		}
 	}
 }
 

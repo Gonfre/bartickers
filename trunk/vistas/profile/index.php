@@ -1,13 +1,9 @@
-<script type="text/javascript" src="http://gd.geobytes.com/gd?after=-1&variables=GeobytesCode,GeobytesInternet,GeobytesCity,GeobytesCountry,GeobytesRegion"></script>
 <script type="text/javascript">
 <!--
 var initLocation = function ( response ) {
 	val = response.geonames[0];
 	var texto = val.name + (val.adminName1 ? (val.adminName1 != val.name ? ", "+val.adminName1 : "") : "") + ", " + val.countryName;
-    //eval(callback + "('"+texto+"')");
-    //alert(texto);
-    //alert( getLocationInputObj("txtLocation").val() );
-    getLocationInputObj("txtLocation").val(omitirAcentos(texto));
+	getFilterlistInputObj("txtLocation").val(omitirAcentos(texto));
 }
 
 $( document ).on( "pagecreate", "#page", function() {
@@ -16,9 +12,42 @@ $( document ).on( "pagecreate", "#page", function() {
 
     if ("<?php echo (isset($this->location) ? $this->location : ""); ?>" == "") {
 		//$("#txtLocation").parent().children(":first").children(":first").children("first").val(sGeobytesCity + ", " + sGeobytesCountry);
-		getPlaces( sGeobytesCity+","+sGeobytesRegion, sGeobytesCity, sGeobytesInternet, initLocation);
+		//getPlaces( currentCity+","+currentRegion, currentCity, currentCountry, initLocation);
+		getCurrentLocationByIP(function() {
+			getPlaces( currentCity+","+currentRegion, currentCity, currentCountry, initLocation);
+		});
+	} else {
+		getCurrentLocationByIP();
 	}
+
+	//Geo location
+	getCurrentLocationByGPS(function(position) {
+		saveUserLocation(position.coords.latitude, position.coords.longitude);
+	}, function() {});
+
+
+	$("#txtAlbumName").on("input", function(e, ui) {
+		var input = $(this);
+		if (input.val() == "") {
+			$("#btnNewAlbumOk").addClass('ui-state-disabled');
+		} else {
+			if ($("#btnNewAlbumOk").hasClass('ui-state-disabled')) {
+				$("#btnNewAlbumOk").removeClass('ui-state-disabled');
+			}
+		}
+	});
 });
+
+
+function selectAlbum(id, name, stickers) {
+	if ($("#txtAlbumName").val() == "") {
+		$("#txtAlbumName").val(name);
+	}
+	$("#txtAlbumId").val(id);
+	$("#txtAlbumStickers").val(stickers);
+	$("#btnNewAlbumOk").removeClass('ui-state-disabled');
+	$("#txtAlbumName").focus();
+}
 //-->
 </script>
 
@@ -58,7 +87,7 @@ $( document ).on( "pagecreate", "#page", function() {
 		<li>
 			<div class="ui-grid-a">
 				 <div class="ui-block-a" style="width:65%;">
-				 	<input data-mini="true" data-theme="a" data-clear-btn="true" id="txtPhone" pattern="[0-9]*" id="number" value="" type="tel">
+				 	<input data-mini="true" data-theme="a" data-clear-btn="true" id="txtPhone" pattern="[0-9]*" id="number" value="<?php echo $this->telephone;?>" type="tel">
 				 </div>
 				 <div class="ui-block-b" style="width:35%;">
 				 	<h1>&nbsp;(opcional)</h1>
@@ -99,7 +128,7 @@ $( document ).on( "pagecreate", "#page", function() {
   
   	<br />
 	<!-- Albumes -->		
-	<ul data-role="listview" data-mini="true" data-split-icon="delete" data-theme="a" data-divider-theme="a" data-count-theme="c" data-inset="true">
+	<ul id="ulAlbums" data-role="listview" data-mini="true" data-split-icon="delete" data-theme="a" data-divider-theme="a" data-count-theme="c" data-inset="true">
 		<li data-role="list-divider">
 			<div class="ui-bar ui-bar-a" style="border:0px;">
 			    <label><strong>Mis &aacute;lbumes</strong></label>
@@ -116,9 +145,9 @@ $( document ).on( "pagecreate", "#page", function() {
 		if ($s->doSelectCount()) {
 			$c = $s->getValueByPos(0);
 		}
-		echo '<li>';
+		echo '<li id="liAlbum-'.$i.'">';
 		echo '  <a href="#"><label>'.$n.'</label><span class="ui-li-count">'.$c.'/'.$t.'</span></a>';
-		echo '  <a href="#" onclick="javascript:showConfirmDialog(\'Eliminar?\',\'Desea eliminar el album &quot;'.$n.'&quot;?\', \'Esto no se puede deshacer.\', \'alert('.$i.')\');" data-rel="popup" data-position-to="window" data-transition="flip"></a>';
+		echo '  <a href="#" onclick="javascript:showConfirmDialog(\'Eliminar?\',\'Desea eliminar el album &quot;'.$n.'&quot;?\', \'Esto no se puede deshacer.\', \'deleteIt(\\\'album\\\','.$i.')\');" data-rel="popup" data-position-to="window" data-transition="flip"></a>';
 		echo '</li>';
 	}
 	?>
@@ -161,19 +190,19 @@ $( document ).on( "pagecreate", "#page", function() {
 	<div class="ui-content" role="main">
 		<p>Seleccione una ubicacion:</p>
 		<ul id="txtNewPlace" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Buscar un lugar..." data-filter-theme="a"></ul>
-		<a href="javascript:addIt('location', null, 'popupLocation');" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext">Ok</a>
+		<a href="javascript:addIt('location', 'popupLocation');" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext">Ok</a>
 		<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext" data-rel="back">Cancel</a>
 	</div>
 </div>
 
 
-<div data-role="popup" id="popupAlbums" data-theme="a" class="ui-corner-all">
+<div data-role="popup" id="popupAlbums" data-theme="a" class="ui-corner-all" style="min-width:280px;">
 	<div data-role="header" data-theme="a" role="banner" class="ui-header ui-bar-a">
 		<h1 class="ui-title" role="heading">Agregar &aacute;lbum</h1>
 	</div>
 	<div class="ui-content" role="main">
 		<p>Seleccione un &aacute;lbum:</p>
-		<ul id="txtNewAlbum" data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Buscar un &aacute;lbum..." data-filter-theme="a">
+		<fieldset data-role="controlgroup" data-mini="true" data-iconpos="right">
 		<?php
 		while ($this->albumTypes->next()) {
 			$i = $this->albumTypes->getValue("album_type");
@@ -181,15 +210,25 @@ $( document ).on( "pagecreate", "#page", function() {
 			$n = $this->albumTypes->getValue("name");
 			$s = $this->albumTypes->getValue("stickers");
 			
-			echo '<li id="liAlbum-'.$i.'" data-icon="false">';
-			echo '  <a href="#"><p><strong>'.$sn.'</strong></p><p>'.$n.'</p><span class="ui-li-count">'.$s.'</span></a>';
-			echo '</li>';
+			//echo '<li id="liNewAlbum-'.$i.'" data-icon="false" onclick="selectAlbum('.$i.',\''.$sn.'\')">';
+			//echo '  <a href="#"><p><strong>'.$sn.'</strong></p><p>'.$n.'</p><span class="ui-li-count">'.$s.'</span></a>';
+			//echo '</li>';
+			
+			
+			echo '<input id="radio-'.$i.'" name="radioAlbum" value="on" type="radio" onclick="selectAlbum('.$i.',\''.$n.'\','.$s.')">';
+			echo '<label for="radio-'.$i.'">';
+			//echo    $n.'<br><span style="font-weight:normal;">'.$sn.'</span>';
+			echo    '<span style="font-weight:normal;">'.$n.'</span>';
+			echo '</label>';
 		}
 		?>
-		</ul>
-		</ul>
+		</fieldset>
 		
-		<a href="javascript:addIt('location', null, 'popupLocation');" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext">Ok</a>
+		<input id="txtAlbumName" value="" placeholder="Nombre personalizado" type="text" required="required">
+		<input id="txtAlbumId" type="hidden">
+		<input id="txtAlbumStickers" type="hidden">
+		
+		<a id="btnNewAlbumOk" href="javascript:addIt('album', 'popupAlbums');" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext ui-state-disabled">Ok</a>
 		<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext" data-rel="back">Cancel</a>
 	</div>
 </div>
