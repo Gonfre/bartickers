@@ -347,12 +347,29 @@ class DbModel {
 		$valores = "";
 		$keys = array_keys($this->fieldsByName);
 		for ($i=0; $i<count($keys); $i=$i+1) {
+			$val = $this->fieldsByName[ $keys[$i] ];
 			if ($i > 0) {
 				$campos = $campos . ", " . $keys[$i];
-				$valores = $valores . ", " . $this->conn->getPreparedStatementVar($i+1);
+				if ($val[0] == "%") { //is a db function
+					$valores = $valores . ", " . substr($val, 1);
+					unset($this->fieldsByName[ $keys[$i] ]);
+					array_splice($keys, $i, 1);
+					$i = $i-1;
+				} else {
+					$valores = $valores . ", " . $this->conn->getPreparedStatementVar($i+1);
+				}
 			} else {
-				$valores = $this->conn->getPreparedStatementVar($i+1);
 				$campos = $keys[$i];
+				if ($val[0] == "%") { //is a db function
+					$valores = substr($val, 1);
+					unset($this->fieldsByName[ $keys[$i] ]);
+					array_splice($keys, $i, 1);
+					$i = $i-1;
+				} else {
+					$valores = $this->conn->getPreparedStatementVar($i+1);
+				}
+				
+				
 			}
 		}
 
@@ -393,10 +410,25 @@ class DbModel {
 		$valores = "";
 		$keys = array_keys($this->fieldsByName);
 		for ($i=0; $i<count($keys); $i=$i+1) {
+			$val = $this->fieldsByName[ $keys[$i] ];
 			if ($i > 0) {
-				$campos = $campos . ", " . $keys[$i] . "=" . $this->conn->getPreparedStatementVar($i+1);
+				if ($val[0] == "%") { //is a db function
+					$campos = $campos . ", " . $keys[$i] . "=" . substr($val, 1);
+					unset($this->fieldsByName[ $keys[$i] ]);
+					array_splice($keys, $i, 1);
+					$i = $i-1;
+				} else {
+					$campos = $campos . ", " . $keys[$i] . "=" . $this->conn->getPreparedStatementVar($i+1);
+				}
 			} else {
-				$campos = $keys[$i] . "=" . $this->conn->getPreparedStatementVar($i+1);
+				if ($val[0] == "%") { //is a db function
+					$campos = $keys[$i] . "=" . substr($val, 1);
+					unset($this->fieldsByName[ $keys[$i] ]);
+					array_splice($keys, $i, 1);
+					$i = $i-1;
+				} else {
+					$campos = $keys[$i] . "=" . $this->conn->getPreparedStatementVar($i+1);
+				}
 			}
 		}
 

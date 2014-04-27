@@ -10,8 +10,29 @@ function omitirAcentos(text) {
     return text;
 }
 
-function getLocationInputObj(idUl) {
+function getFilterlistInputObj(idUl) {
 	return $("#"+idUl).parent().find(":input");
+}
+
+function getCurrentLocationByIP(callback) {
+	$.get("http://ipinfo.io", function(response) {
+    	currentCity = response.city;
+    	currentRegion = response.region;
+    	currentCountry = response.country;
+    	currentIP = response.ip;
+    	
+    	if (callback) {
+    		callback();
+    	}
+	}, "jsonp");
+}
+
+function getCurrentLocationByGPS(callback, onerror) {
+	$(function() {
+        if (navigator.geolocation) {
+           navigator.geolocation.getCurrentPosition(callback, onerror);
+        }
+    });
 }
 
 function getPlaces( q, startWith, country, callback) {
@@ -46,7 +67,7 @@ function loadGeoData(idText) {
         if ( value && value.length > 2 ) {
             $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
             $ul.listview( "refresh" );
-            getPlaces(inputLocation.val(), inputLocation.val(), sGeobytesInternet, function(response){
+            getPlaces(inputLocation.val(), inputLocation.val(), currentCountry, function(response){
             	$.each( response.geonames, function ( i, val ) {
                 	var li = document.createElement("LI");
                 	var a = document.createElement("A");

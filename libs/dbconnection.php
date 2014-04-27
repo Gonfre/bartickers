@@ -734,8 +734,17 @@ class DbConnection {
 					$key = $keys[$i];
 					$value = $values[$key];
 					
-					$b = ($key == "id") || (strpos($key, "_id")!== false) || (strpos($key, "id_")!== false);
-					$t = ($b ? "i" : "s");
+					$is_id = ($key == "id") || (strpos($key, "_id")!== false) || (strpos($key, "id_")!== false);
+					if ($is_id || is_int($value) || is_long($value)) {
+						$t = "i";
+					} elseif (is_double($value) || is_float($value)) {
+						$t = "d";
+					/*} elseif (is_nan($value)) {
+						$t = "s";*/
+					} else {
+						$t = "s"; // b -> blob
+					}
+					
 					$types = $types . $t;
 
 					$nuevo = array_merge($nuevo, array(& $values[$key] ));

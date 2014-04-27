@@ -55,6 +55,9 @@ function deleteIt(tipo, id) {
 			if (tipo == "location") {
 				$("#liLocation-"+id).remove();
 				$("#ulLocations").listview("refresh");
+			} else {
+				$("#liAlbum-"+id).remove();
+				$("#ulAlbums").listview("refresh");
 			}
 		}
 	})
@@ -67,17 +70,25 @@ function deleteIt(tipo, id) {
 /**
  * Agrega al usuario un album o un location
  */
-function addIt(tipo, text, popup) {
+function addIt(tipo, popup, cant) {
 	createLoadMsg();
-	text = (tipo == "location" ? getLocationInputObj("txtNewPlace").val() : text); 
+	var text = "";
+	var id = "";
+	if (tipo == "location") {
+		text = getFilterlistInputObj("txtNewPlace").val()
+	} else {
+		text = $("#txtAlbumName").val();
+		id = $("#txtAlbumId").val();
+	}
 	closeDialog(popup, true);
-	getLocationInputObj("txtNewPlace").val("");
+	getFilterlistInputObj("txtNewPlace").val("");
 	$.ajax({
 		type: "POST",
 		url: "profile/xAddSomething",
 		data: {
 			type: tipo, 
-			text: text
+			text: text,
+			id: id
 		}
 	})
 	.done(function( msg ) {
@@ -96,11 +107,40 @@ function addIt(tipo, text, popup) {
 					$("#ulLocations").append(toAdd);
 					$("#ulLocations").listview("refresh");
 				}
+			} else {
+				var toAdd = '<li id="liAlbum-'+msg+'">' +
+							'  <a href="#"><label>'+text+'</label><span class="ui-li-count">0/'+$("#txtAlbumStickers").val()+'</span></a>' +
+							'  <a href="#" onclick="javascript:showConfirmDialog(\'Eliminar?\',\'Desea eliminar el album &quot;'+text+'&quot;?\', \'Esto no se puede deshacer.\', \'deleteIt(\\\'album\\\','+msg+')\');" data-rel="popup" data-position-to="window" data-transition="flip"></a>' +
+							'</li>';
+				$("#ulAlbums").append(toAdd);
+				$("#ulAlbums").listview("refresh");
 			}
 		}
 	})
 	.fail(function() {
 		destroyMsg();
 		showErrorDialog("Error", "Error eliminado los datos");
+	});
+}
+
+/**
+ * Almacena la location (GPS) del usuario
+ * @param lat
+ * @param lon
+ */
+function saveUserLocation(lat, lon) {
+	$.ajax({
+		type: "POST",
+		url: "profile/xSaveUserLocation",
+		data: {
+			lat: lat, 
+			lon: lon
+		}
+	})
+	.done(function( msg ) {
+		
+	})
+	.fail(function() {
+		
 	});
 }
