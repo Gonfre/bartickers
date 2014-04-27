@@ -6,6 +6,7 @@ require_once("libs/i18n.php");
 require_once("modelos/users.php");
 require_once("modelos/albums.php");
 require_once("modelos/album_stickers.php");
+require_once("modelos/album_types.php");
 require_once("modelos/locations.php");
 require_once("modelos/user_locations.php");
 
@@ -41,6 +42,10 @@ class ProfileController extends Controller {
 			$this->userLocations = new User_locations();
 			$this->userLocations->addCondition("user_id", $u->getId());
 			$this->userLocations->doSelectAllWithForeign("locations", "location_id", DB_SAME_FIELD);
+			
+			//album types
+			$this->albumTypes = new Album_types();
+			$this->albumTypes->doSelectAll();
 		}
 	}
 	
@@ -82,7 +87,7 @@ class ProfileController extends Controller {
 		}
 		
 		//continuo...
-		$u = new Users(2);
+		$u = new Users(2); //<<<< LocalUser
 		$u->setValue("notif", $notif);
 		//<<<< Aca va el numero de telf
 		if (isset($locId)) {
@@ -109,18 +114,61 @@ class ProfileController extends Controller {
 		if ($type == "album") {
 			$o = new Albums($id);
 			$ok = $o->doDelete(); 
-		} else {
+		} else if ($type == "location") {
 			$o = new User_locations();
-			$o->addCondition("user_id", 2);
+			$o->addCondition("user_id", 2); //<<<< LocalUser
 			$o->addCondition("location_id", $id);
 			$ok = $o->doDeleteAll();
 		}
 		
 		if ($ok) {
-			return "OK";
+			echo "OK";
 		} else {
-			return "KO";
+			echo "KO";
 		}
+	}
+	
+	
+	/**
+	 * Agrega un album o location al usuario
+	 * @var type Tipo a eliminar: album, location 
+	 * @var text Texto a guardar
+	 * @return string
+	 */
+	public function xAddSomething() {
+		extract($_REQUEST);
+		
+		$ok = "KO";
+		if ($type == "album") {
+			
+		} else if ($type == "location") {
+			//busco la location si existe
+			$l = new Locations();
+			$l->addCondition("location_name", $text);
+			if ($l->doSelectAll()) {
+				if (!$l->next()) { //no existe
+					$l->clear();
+					$l->setValue("location_name", $text);
+					if ($l->doSave()) {
+						$locId = $l->getId();
+					}
+				} else {
+					$locId = $l->getId();
+				}
+			}
+			
+			//actualizo la user_location
+			$this->ul = new User_locations();
+			$this->ul->setValue("user_id", 2); //<<<< LocalUser
+			$this->ul->setValue("location_id", $locId);
+			if ($this->ul->doSave()) {
+				$ok = "$locId";
+			} else {
+				$ok = "YA";
+			}
+		}
+		
+		echo $ok;
 	}
 }
 

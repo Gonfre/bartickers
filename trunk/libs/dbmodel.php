@@ -176,6 +176,9 @@ class DbModel {
 			try {
 				$this->conn->preparar("SELECT * FROM $this->tableName WHERE $condiciones $orders");
 				$this->result = $this->conn->ejecutar($this->conditionFields);
+				if (is_null($this->result)) {
+					return false;
+				}
 			} catch (Exception $e) {
 				throw $e;
 				return false;
@@ -315,7 +318,7 @@ class DbModel {
 		}
 
 		$this->result = $this->conn->preparar("SELECT * FROM $this->tableName WHERE $field $comp $1");
-		if (!$this->result) {
+		if (is_null($this->result)) {
 			return false;
 		}
 		
@@ -354,12 +357,15 @@ class DbModel {
 		}
 
 		$this->result = $this->conn->preparar("INSERT INTO $this->tableName ($campos) VALUES ($valores)");
-		if (!$this->result) {
+		if (is_null($this->result)) {
 			return false;
 		}
 		
 		try {
 			$this->result = $this->conn->ejecutar($this->fieldsByName);
+			if (is_null($this->result)) {
+				return false;
+			}
 		} catch (Exception $e) {
 			throw $e;
 			return false;
@@ -395,7 +401,7 @@ class DbModel {
 		}
 
 		$this->result = $this->conn->preparar("UPDATE $this->tableName SET $campos WHERE $this->idField=$this->id");
-		if (!$this->result) {
+		if (is_null($this->result)) {
 			return false;
 		}
 		
@@ -764,14 +770,19 @@ class DbModel {
 		@return int
 	*/
 	public function getLastId() {
-		if ($this->execQuery("SELECT MAX($this->idField) FROM ".$this->tableName)) {
-			if ($this->next()) {
-				return $this->getValueByPos(0);
+		try {
+			if ($this->execQuery("SELECT MAX($this->idField) FROM ".$this->tableName)) {
+				if ($this->next()) {
+					return $this->getValueByPos(0);
+				} else {
+					return 0;
+				}
 			} else {
-				return 0;
+				return -1;
 			}
-		} else
+		} catch(Exception $e) {
 			return -1;
+		}
 	}
 	
 	
