@@ -52,7 +52,7 @@ function loadGeoData(idText) {
                 	var a = document.createElement("A");
                 	var texto = val.name + (val.adminName1 ? (val.adminName1 != val.name ? ", "+val.adminName1 : "") : "") + ", " + val.countryName;
                 	texto = omitirAcentos(texto);
-                	a.innerHTML = texto;
+                	a.innerHTML = "<p><strong>"+texto+"</strong></p>";
                 	a.setAttribute("class", "ui-btn");
                 	a.setAttribute("rel", "dialog");
                 	a.onclick = function() {

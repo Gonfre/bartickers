@@ -730,7 +730,8 @@ class DbConnection {
 				$types = "";
 				$nuevo = array();
 				for ($i=0; $i < count($values); $i++) {
-					$key = array_keys($values)[$i];
+					$keys = array_keys($values); 
+					$key = $keys[$i];
 					$value = $values[$key];
 					
 					$b = ($key == "id") || (strpos($key, "_id")!== false) || (strpos($key, "id_")!== false);
