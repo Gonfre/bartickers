@@ -155,7 +155,7 @@ function showConfirmDialog(title, msg, msg2, action) {
 	$( "#confirmDialog" ).popup( "open", {transition: "flip"} );
 }
 
-function showErrorDialog(title, msg) {
+function showErrorDialog(title, msg, theme) {
 	
 	var divPopup = document.createElement("DIV");
 	divPopup.setAttribute("data-role", "popup");
@@ -169,7 +169,7 @@ function showErrorDialog(title, msg) {
 	divHeader.setAttribute("data-role", "header");
 	divHeader.setAttribute("data-theme", "a");
 	divHeader.setAttribute("role", "banner");
-	divHeader.setAttribute("class", "ui-header ui-bar-d");
+	divHeader.setAttribute("class", "ui-header ui-bar-" + (theme ? theme : "d"));
 	
 	var h1 = document.createElement("H1");
 	h1.setAttribute("class", "ui-title");

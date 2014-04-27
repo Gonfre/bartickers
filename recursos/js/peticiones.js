@@ -24,7 +24,7 @@ function saveBasicData() {
 		if (msg == "KO") {
 			showErrorDialog("Error", "Error guardando datos");
 		} else {
-			alert(1);
+			showErrorDialog("Informaci&oacute;n", "Datos b&aacute;sicos guardados", "a");
 		}
 	})
 	.fail(function() {
