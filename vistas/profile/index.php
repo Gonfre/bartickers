@@ -6,8 +6,8 @@ var initLocation = function ( response ) {
 	var texto = val.name + (val.adminName1 ? (val.adminName1 != val.name ? ", "+val.adminName1 : "") : "") + ", " + val.countryName;
     //eval(callback + "('"+texto+"')");
     //alert(texto);
-    //alert( $("#txtLocation").parent().children(":first").children(":first").children(":first").val() );
-    $("#txtLocation").parent().children(":first").children(":first").children(":first").val(omitirAcentos(texto));
+    //alert( getLocationInputObj("txtLocation").val() );
+    getLocationInputObj("txtLocation").val(omitirAcentos(texto));
 }
 
 $( document ).on( "pagecreate", "#page", function() {
@@ -103,7 +103,7 @@ $( document ).on( "pagecreate", "#page", function() {
 		<li data-role="list-divider">
 			<div class="ui-bar ui-bar-a" style="border:0px;">
 			    <label><strong>Mis &aacute;lbumes</strong></label>
-			    <a href="#" data-icon="plus" data-theme="a" class="ui-btn-right" data-iconpos="notext">Agregar</a>
+			    <a href="#popupAlbums" data-rel="popup" data-position-to="window" data-icon="plus" data-theme="a" class="ui-btn-right" data-iconpos="notext">Agregar</a>
 			</div>
 		</li>
 	<?php
@@ -129,7 +129,7 @@ $( document ).on( "pagecreate", "#page", function() {
 		<li data-role="list-divider">
 			<div class="ui-bar ui-bar-a" style="border:0px;">
 			    <label><strong>Mis sitios de trueque</strong></label>
-			    <a href="#popupLogin" data-rel="popup" data-position-to="window" data-icon="plus" class="ui-btn-right" data-iconpos="notext">Agregar</a>
+			    <a href="#popupLocation" data-rel="popup" data-position-to="window" data-icon="plus" class="ui-btn-right" data-iconpos="notext">Agregar</a>
 			</div>
 		</li>
 	<?php 
@@ -154,14 +154,41 @@ $( document ).on( "pagecreate", "#page", function() {
 
 
 <!-- Popups -->
-<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+<div data-role="popup" id="popupLocation" data-theme="a" class="ui-corner-all">
 	<div data-role="header" data-theme="a" role="banner" class="ui-header ui-bar-a">
 		<h1 class="ui-title" role="heading">Agregar ubicacion</h1>
 	</div>
 	<div class="ui-content" role="main">
 		<p>Seleccione una ubicacion:</p>
 		<ul id="txtNewPlace" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Buscar un lugar..." data-filter-theme="a"></ul>
-		<a href="#" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext">Ok</a>
+		<a href="javascript:addIt('location', null, 'popupLocation');" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext">Ok</a>
+		<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext" data-rel="back">Cancel</a>
+	</div>
+</div>
+
+
+<div data-role="popup" id="popupAlbums" data-theme="a" class="ui-corner-all">
+	<div data-role="header" data-theme="a" role="banner" class="ui-header ui-bar-a">
+		<h1 class="ui-title" role="heading">Agregar &aacute;lbum</h1>
+	</div>
+	<div class="ui-content" role="main">
+		<p>Seleccione un &aacute;lbum:</p>
+		<ul id="txtNewAlbum" data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="false" data-filter-placeholder="Buscar un &aacute;lbum..." data-filter-theme="a">
+		<?php
+		while ($this->albumTypes->next()) {
+			$i = $this->albumTypes->getValue("album_type");
+			$n = $this->albumTypes->getValue("short_name");
+			$s = $this->albumTypes->getValue("stickers");
+			
+			echo '<li id="liAlbum-'.$i.'">';
+			echo '  <a href="#"><label>'.$n.'</label></p><span class="ui-li-count">'.$s.'</span></a>';
+			echo '</li>';
+		}
+		?>
+		</ul>
+		</ul>
+		
+		<a href="javascript:addIt('location', null, 'popupLocation');" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext">Ok</a>
 		<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ui-corner-all ui-shadow ui-btn-b ui-btn-icon-notext" data-rel="back">Cancel</a>
 	</div>
 </div>

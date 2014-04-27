@@ -10,6 +10,9 @@ function omitirAcentos(text) {
     return text;
 }
 
+function getLocationInputObj(idUl) {
+	return $("#"+idUl).parent().find(":input");
+}
 
 function getPlaces( q, startWith, country, callback) {
 	$.ajax({
@@ -210,9 +213,11 @@ function showAlbumsDialog(msg) {
 	$( "#albumsDialog" ).popup( "open", {transition: "flip"} );
 }
 
-function closeDialog(id) {
+function closeDialog(id, keep) {
 	$( "#"+id ).popup( "close" );
-	$( "#"+id ).remove();
+	if (!keep) {
+		$( "#"+id ).remove();
+	}
 }
 
 function createLoadMsg() {
