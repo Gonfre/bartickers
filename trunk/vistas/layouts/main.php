@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
     	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<meta name = "viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes" />
     
     	<link rel="apple-touch-icon" href="recursos/imgs/250x250.png" />
 		<link rel="apple-touch-icon-precomposed" href="recursos/imgs/250x250.png" />
@@ -36,20 +36,40 @@
 			    <!-- Menu -->
 			    <div data-role="collapsibleset" data-theme="a" data-content-theme="a" data-mini="true" data-collapsed-icon="grid" data-expanded-icon="grid">
 			    	<label>Mis &Aacute;lbumes:</label>
-					<div data-role="collapsible">
-					    <h5>Mi mundialito (55/640)</h5>
-					    <fieldset data-role="controlgroup" data-mini="true">
-			    			<a href="#" rel="external" class="ui-btn ui-mini ui-corner-all ui-btn-a ui-icon-eye ui-btn-icon-left">Ver &aacute;lbum</a>
-					    	<a href="bartering" rel="external" class="ui-btn ui-corner-all ui-btn-a ui-icon-recycle ui-btn-icon-left">Truequear</a>
-			    		</fieldset>
-					</div>
-				    <div data-role="collapsible" data-theme="c">
-					    <h5>El de mi hermana (20/640)</h5>
-					    <fieldset data-role="controlgroup" data-mini="true">
-			    			<a href="#" rel="external" class="ui-btn ui-mini ui-corner-all ui-btn-a ui-icon-eye ui-btn-icon-left">Ver &aacute;lbum</a>
-					    	<a href="bartering" rel="external" class="ui-btn ui-corner-all ui-btn-a ui-icon-recycle ui-btn-icon-left">Truequear</a>
-			    		</fieldset>
-					</div>
+			    	<?php
+			    	if (!isset($this->albums)) {
+						require_once 'modelos/albums.php';
+						require_once 'modelos/album_stickers.php';
+
+						$this->albums = new Albums();
+						$this->albums->addCondition("user_id", 2); //LocalUser
+						$this->albums->doSelectAllWithForeign("album_types", "album_type", DB_SAME_FIELD);
+					}
+					
+					while ($this->albums->next()) {
+						$i = $this->albums->getValue("album_id");
+						$n = $this->albums->getValue("album_name");
+						$t = $this->albums->getValue("stickers");
+						$s = new Album_stickers();
+						$s->addCondition("album_id", $this->albums->getId());
+						if ($s->doSelectCount()) {
+							$c = $s->getValueByPos(0);
+						}
+						
+						echo '<div data-role="collapsible">';
+						echo '   <h5>'.$n.' (<span id="menuCant-'.$i.'">'.$c.'</span>/'.$t.')</h5>';
+						echo '   <fieldset data-role="controlgroup" data-mini="true">';
+						echo '      <a href="#" rel="external" class="ui-btn ui-mini ui-corner-all ui-btn-a ui-icon-eye ui-btn-icon-left">';
+						echo           'Ver &aacute;lbum';
+						echo        '</a>';
+						echo '      <a href="bartering?album_id='.$i.'" rel="external" class="ui-btn ui-corner-all ui-btn-a ui-icon-recycle ui-btn-icon-left">';
+						echo           'Truequear';
+						echo        '</a>';
+						echo '   </fieldset>';
+						echo '</div>';
+					}
+					?>
+
 			    </div>
 			    <hr />
 			    <fieldset data-role="controlgroup" data-mini="true">
