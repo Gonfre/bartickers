@@ -5,11 +5,16 @@
 		<meta name = "viewport" content = "user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="mobile-web-app-capable" content="yes">
+		
+		<link rel="apple-touch-icon" href="recursos/imgs/250x250.png" />
+		<link rel="apple-touch-icon-precomposed" href="recursos/imgs/250x250.png" />
     
     	<?php echo APP_BASE; ?>
 		<title><?php echo APP_TITLE; ?> - <?php echo $this->pageTitle; ?></title>
 		<script type="text/javascript" src="recursos/js/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript" src="recursos/js/jquery.mobile-1.4.2.min.js"></script>
+		<script type="text/javascript" src="recursos/js/barticker.js"></script>
+		<script type="text/javascript" src="recursos/js/peticiones.js"></script>
 		
 		<link rel="stylesheet" type='text/css' href="recursos/css/jquery.mobile.structure-1.4.2.min.css"/>
 		<link rel="stylesheet" type='text/css' href="recursos/themes/jquery.mobile.icons.min.css"/>

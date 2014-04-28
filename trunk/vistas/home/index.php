@@ -1,3 +1,37 @@
+<script type="text/javascript">
+<!--
+$(document).on("ready", function() {
+	$("div.invalidUser").hide();
+	
+	$("#popupLogin input").each( function() {
+		$(this).on("input", function(e, ui) {
+			var un = $("#un").val();
+			var pw = $("#pw").val();
+			
+			if (un != "" && pw != "") {
+				//if ($("#btnLogin").hasClass("ui-state-disabled")) {
+					$("#btnLogin").removeClass("ui-state-disabled");
+				//}
+			} else {
+				//if (!$("#btnLogin").hasClass("ui-state-disabled")) {
+					$("#btnLogin").addClass("ui-state-disabled");
+				//}
+			}
+		});
+	});
+});
+//-->
+</script>
+
+<style>
+<!--
+div.invalidUser {
+	color: red;
+	text-align: center;
+}
+-->
+</style>
+
 <ul data-role="listview" data-split-icon="delete" data-theme="a" data-divider-theme="a" data-count-theme="c" data-inset="true">
 	<li data-role="list-divider">
 		<div class="ui-bar ui-bar-a" style="border:0px;">
@@ -30,16 +64,15 @@
 				<br/>
 				<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
 					<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-				    <form>
-				        <div style="padding:10px 20px;">
-				            <h3>Ingrese Usuario y Contraseña</h3>
-				            <label for="un" class="ui-hidden-accessible">Usuario:</label>
-				            <input type="text" name="user" id="un" value="" placeholder="usuario" data-theme="a">
-				            <label for="pw" class="ui-hidden-accessible">Contrase&ntilde;a:</label>
-				            <input type="password" name="pass" id="pw" value="" placeholder="contraseña" data-theme="a">
-				            <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Ingresar</button>
-				        </div>
-				    </form>
+			        <div style="padding:10px 20px;">
+			            <h3>Ingrese Usuario y Contraseña</h3>
+			            <label for="un" class="ui-hidden-accessible">Usuario:</label>
+			            <input type="text" name="user" id="un" value="" placeholder="usuario" data-theme="a" required="required">
+			            <label for="pw" class="ui-hidden-accessible">Contrase&ntilde;a:</label>
+			            <input type="password" name="pass" id="pw" value="" placeholder="contraseña" data-theme="a" required="required">
+			            <div class="invalidUser">* Usuario y/o password inv&aacute;lidos</div>
+			            <button type="button" onclick="loginWithBarticker()" id="btnLogin" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check ui-state-disabled">Ingresar</button>
+			        </div>
 				</div>			 
 			 </div>
 		</div>

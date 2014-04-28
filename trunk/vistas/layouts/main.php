@@ -34,7 +34,7 @@
 			<!-- panel left -->
 			<div data-role="panel" id="panel-menu" data-theme="b">
 			    <!-- Menu -->
-			    <div data-role="collapsibleset" data-theme="a" data-content-theme="a" data-mini="true" data-collapsed-icon="grid" data-expanded-icon="grid">
+			    <div id="menuAlbums" data-role="collapsibleset" data-theme="a" data-content-theme="a" data-mini="true" data-collapsed-icon="grid" data-expanded-icon="grid">
 			    	<label>Mis &Aacute;lbumes:</label>
 			    	<?php
 			    	if (!isset($this->albums)) {
@@ -42,7 +42,7 @@
 						require_once 'modelos/album_stickers.php';
 
 						$this->albums = new Albums();
-						$this->albums->addCondition("user_id", 2); //LocalUser
+						$this->albums->addCondition("user_id", LocalUser::getCurrentUser()->getId()); //LocalUser
 						$this->albums->doSelectAllWithForeign("album_types", "album_type", DB_SAME_FIELD);
 					}
 					
@@ -56,7 +56,7 @@
 							$c = $s->getValueByPos(0);
 						}
 						
-						echo '<div data-role="collapsible">';
+						echo '<div id="menuAlbum-'.$i.'" data-role="collapsible">';
 						echo '   <h5>'.$n.' (<span id="menuCant-'.$i.'">'.$c.'</span>/'.$t.')</h5>';
 						echo '   <fieldset data-role="controlgroup" data-mini="true">';
 						echo '      <a href="#" rel="external" class="ui-btn ui-mini ui-corner-all ui-btn-a ui-icon-eye ui-btn-icon-left">';
