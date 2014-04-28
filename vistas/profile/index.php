@@ -135,22 +135,23 @@ function selectAlbum(id, name, stickers) {
 			    <a href="#popupAlbums" data-rel="popup" data-position-to="window" data-icon="plus" data-theme="a" class="ui-btn-right" data-iconpos="notext">Agregar</a>
 			</div>
 		</li>
-	<?php
-	while ($this->albums->next()) {
-		$i = $this->albums->getValue("album_id");
-		$n = $this->albums->getValue("album_name");
-		$t = $this->albums->getValue("stickers");
-		$s = new Album_stickers();
-		$s->addCondition("album_id", $this->albums->getId());
-		if ($s->doSelectCount()) {
-			$c = $s->getValueByPos(0);
+		<?php
+		$this->albums->first();
+		while ($this->albums->next()) {
+			$i = $this->albums->getValue("album_id");
+			$n = $this->albums->getValue("album_name");
+			$t = $this->albums->getValue("stickers");
+			$s = new Album_stickers();
+			$s->addCondition("album_id", $this->albums->getId());
+			if ($s->doSelectCount()) {
+				$c = $s->getValueByPos(0);
+			}
+			echo '<li id="liAlbum-'.$i.'">';
+			echo '  <a href="#"><label>'.$n.'</label><span class="ui-li-count">'.$c.'/'.$t.'</span></a>';
+			echo '  <a href="#" onclick="javascript:showConfirmDialog(\'Eliminar?\',\'Desea eliminar el album &quot;'.$n.'&quot;?\', \'Esto no se puede deshacer.\', \'deleteIt(\\\'album\\\','.$i.')\');" data-rel="popup" data-position-to="window" data-transition="flip"></a>';
+			echo '</li>';
 		}
-		echo '<li id="liAlbum-'.$i.'">';
-		echo '  <a href="#"><label>'.$n.'</label><span class="ui-li-count">'.$c.'/'.$t.'</span></a>';
-		echo '  <a href="#" onclick="javascript:showConfirmDialog(\'Eliminar?\',\'Desea eliminar el album &quot;'.$n.'&quot;?\', \'Esto no se puede deshacer.\', \'deleteIt(\\\'album\\\','.$i.')\');" data-rel="popup" data-position-to="window" data-transition="flip"></a>';
-		echo '</li>';
-	}
-	?>
+		?>
 	</ul>
 	
 	<!-- Sitios de trueque -->

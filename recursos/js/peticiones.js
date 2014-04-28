@@ -1,6 +1,40 @@
-/**
+/** ***************************************
  * Archivo con peticiones 
- */
+ ******************************************/
+
+
+/*********************  LOGIN  *********************/
+
+function loginWithBarticker() {
+	var un = $("#un").val();
+	var pw = $("#pw").val();
+	
+	createLoadMsg();
+	$.ajax({
+		type: "POST",
+		url: "home/xLogin",
+		data: {
+			user: un, 
+			pass: pw
+		}
+	})
+	.done(function( msg ) {
+		destroyMsg();
+		if (msg == "KO") {
+			$("div.invalidUser").show();
+		} else {
+			//redirect to profile!
+			var loc = window.location.href;
+			loc = loc.replace("home", "profile");
+			loc = loc.substring(0, loc.indexOf("profile")+7);
+			window.location.href = loc;
+		}
+	})
+	.fail(function() {
+		destroyMsg();
+		showErrorDialog("Error", "Error en login");
+	});
+}
 
 
 /********************* PROFILE *********************/
@@ -58,6 +92,10 @@ function deleteIt(tipo, id) {
 			} else {
 				$("#liAlbum-"+id).remove();
 				$("#ulAlbums").listview("refresh");
+				
+				//menu
+				$("#menuAlbum-"+id).remove();
+				$("#menuAlbums").collapsibleset("refresh");
 			}
 		}
 	})
@@ -114,6 +152,22 @@ function addIt(tipo, popup, cant) {
 							'</li>';
 				$("#ulAlbums").append(toAdd);
 				$("#ulAlbums").listview("refresh");
+				
+				//menu
+				var toAddMenu = '<div id="menuAlbum-'+msg+'" data-role="collapsible">' +
+								'   <h5>'+text+' (<span id="menuCant-'+msg+'">0</span>/'+$("#txtAlbumStickers").val()+')</h5>' +
+								'   <fieldset data-role="controlgroup" data-mini="true">' +
+								'      <a href="#" rel="external" class="ui-btn ui-mini ui-corner-all ui-btn-a ui-icon-eye ui-btn-icon-left">' +
+										'Ver &aacute;lbum' +
+									  '</a>' +
+								'      <a href="bartering?album_id='+msg+'" rel="external" class="ui-btn ui-corner-all ui-btn-a ui-icon-recycle ui-btn-icon-left">' +
+										'Truequear' +
+									  '</a>' +
+								'   </fieldset>' +
+								'</div>';
+				
+				$("#menuAlbums").append(toAddMenu);
+				$("#menuAlbums").collapsibleset("refresh");
 			}
 		}
 	})

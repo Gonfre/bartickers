@@ -21,8 +21,8 @@ class ProfileController extends Controller {
 	
 	public function index() {
 		$u = new Users();
-		//$u->doSelectOne( LocalUser::getCurrentUser()->getId() );
-		$u->doSelectOne(2); 
+		$u->doSelectOne( LocalUser::getCurrentUser()->getId() );
+		//$u->doSelectOne(2); 
 		
 		if ($u->next()) {
 			$this->name = $u->getValue("user_name");
@@ -82,7 +82,7 @@ class ProfileController extends Controller {
 		}
 		
 		//continuo...
-		$u = new Users(2); //<<<< LocalUser
+		$u = new Users( LocalUser::getCurrentUser()->getId() ); //<<<< LocalUser
 		$u->setValue("notif", $notif);
 		$u->setValue("telephone", $phone);
 		if (isset($locId)) {
@@ -110,7 +110,7 @@ class ProfileController extends Controller {
 			$ok = $o->doDeleteIt(); 
 		} else if ($type == "location") {
 			$o = new User_locations();
-			$o->addCondition("user_id", 2); //<<<< LocalUser
+			$o->addCondition("user_id", LocalUser::getCurrentUser()->getId() ); //<<<< LocalUser
 			$o->addCondition("location_id", $id);
 			$ok = $o->doDeleteAll();
 		}
@@ -134,7 +134,7 @@ class ProfileController extends Controller {
 		$ok = "KO";
 		if ($type == "album") {
 			$a = new Albums();
-			$a->setValue("user_id", 2); //LocalUser
+			$a->setValue("user_id", LocalUser::getCurrentUser()->getId() ); //LocalUser
 			$a->setValue("album_type", $id);
 			$a->setValue("album_name", $text);
 			$a->setValue("ini_date", "%NOW()");
@@ -156,7 +156,7 @@ class ProfileController extends Controller {
 			
 			//actualizo la user_location
 			$ul = new User_locations();
-			$ul->setValue("user_id", 2); //<<<< LocalUser
+			$ul->setValue("user_id", LocalUser::getCurrentUser()->getId() ); //<<<< LocalUser
 			$ul->setValue("location_id", $locId);
 			if ($ul->doSave()) {
 				$ok = "$locId";
@@ -176,7 +176,7 @@ class ProfileController extends Controller {
 	public function xSaveUserLocation() {
 		extract($_REQUEST);
 		
-		$u = new Users(2); //<<<< LocalUser
+		$u = new Users( LocalUser::getCurrentUser()->getId() ); //<<<< LocalUser
 		$u->setValue("latitude", $lat);
 		$u->setValue("longitude", $lon);
 		
