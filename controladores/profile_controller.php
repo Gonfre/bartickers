@@ -16,7 +16,7 @@ class ProfileController extends Controller {
 		$this->layout = "main";
 		$this->titleShowed = "Mi Perfil";
 		$this->pageTitle = "Mi Perfil";
-		//$this->nivelesPermitidos = array(2);
+		$this->nivelesPermitidos = array(2);
 	}
 	
 	public function index() {
